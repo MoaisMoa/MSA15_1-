@@ -1,0 +1,25 @@
+USER (1)
+ ├─ user_id (PK)
+ ├─ username (UK)
+ ├─ password
+ ├─ nickname
+ ├─ role (USER / ADMIN)
+ └─ created_at
+      │
+      │ 1:N
+      ▼
+REVIEW (N) ──────────────── (1) MOVIE
+ ├─ review_id (PK)           ├─ movie_id (PK)
+ ├─ user_id (FK)             ├─ title
+ ├─ movie_id (FK)            ├─ director
+ ├─ content                  ├─ genre
+ ├─ rating                   ├─ release_date
+ ├─ created_at               ├─ description
+ └─ updated_at               └─ created_at
+
+
+USER (1)
+ └──────< (N) VOTE >────── (1) RANKING_MATCH
+                 │
+                 │
+                 └────────────── (1) MOVIE
