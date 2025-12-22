@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>project💻 - ALOHA CLASS🌴</title>
+	<title>1조 영화 리뷰&랭킹 웹사이트</title>
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
 </head>
