@@ -1,52 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/layout/common.jsp" %>
-<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="${ root }/">Home</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand" href="${ root }/">Title</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
-      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      
+      <!-- 검색창 넣어야해 
+      <div class="input-group mb-3">
+      	<form class="d-flex"  role="search">
+      	<i class="bi bi-search"></i>
+      		<button id="search-btn"><i class="fa fa-search"></i></button>
+      		<input id="search-input" class="form-control me-2" type="search" placeholder="영화검색" aria-label="Search" aria-describedby="basic-addon2">
+     	 </form>
+      </div>-->
+      
+      <div id="search-box">
+      	<button id="search-btn"><i class="fa fa-search"></i></button>
+      	<input id="search-input" placeholder="searching.."/>
+      </div>
+      
        <ul class="navbar-nav d-flex align-items-center px-3">
-       
        	<%
 			if( loginId == null || loginId.equals("") ) {
-		%>
-       	<!-- 비로그인 시 -->
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="${ root }/login">로그인</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="${ root }/join">회원가입</a>
-        </li>
-        <li class="nav-item">
-        </li>
+		%> 
+		<!-- 메뉴 네비게이션 -->
+        <ul class="nav justify-content-end">
+        	<li class="nav-item">
+        		<a class="nav-link" aria-current="page" href="/#">영화 토너먼트</a>
+        	</li>
+        	<li class="nav-item">
+        		<a class="nav-link" aria-current="page" href="/#">로그인</a>
+        	</li>
+        </ul>
         
         <%
 			}
         	else {
         %>
         <!-- 로그인 시 -->
-        <li class="nav-item">
-        <div class="dropdown">
-	      <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-	        <img src="${root }/static/img/avatar1.png" alt="" width="32" height="32" class="rounded-circle me-2">
-<%-- 	        <strong><%= loginId %></strong> --%>
-	      </a>
-	      <ul class="dropdown-menu dropdown-menu-end text-small shadow">
-	        <li><a class="dropdown-item" href="${ root }/users/my">마이 페이지</a></li>
-	        <li><a class="dropdown-item" href="${ root }/users/update">회원정보 수정</a></li>
-	        <li><hr class="dropdown-divider"></li>
-	        <li><a class="dropdown-item" href="${ root }/logout">로그아웃</a></li>
-	      </ul>
-	    </div>
-        </li>
+        <!-- 검색창 넣어야해 -->
+        
+        <ul class="nav justify-content-end">
+        	<li class="nav-item">
+        		<a class="nav-link" aria-current="page" href="/#">영화 토너먼트</a>
+        	</li>
+        	
+        	<li class="nav-item">
+        		<a class="nav-link" aria-current="page" href="/#">마이페이지</a>
+        	</li>
+        	
+        	<li class="">
+        </ul>
         <%
         	}
+       		//만약 admin이라면?
+       		//만약 mypage라면?
+       		
+       		//if {
+        %>
+        <!-- -->
+        <ul class=""></ul>
+        <%
+			//}
         %>
       </ul>
     </div>

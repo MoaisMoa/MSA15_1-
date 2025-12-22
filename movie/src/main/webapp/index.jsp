@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>project💻 - ALOHA CLASS🌴</title>
+	<link rel="stylesheet" href="path-to/node_modules/mdi/css/materialdesignicons.min.css"/>
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
 </head>
@@ -13,7 +13,7 @@
 	<jsp:include page="/layout/header.jsp" />
 	<%-- [Contents] ######################################################### --%>
 		
-	<h1>영화추천 웹 메인페이지 - 메인</h1>
+	
 							
 						
 	
