@@ -9,8 +9,4 @@ public class MovieServiceImpl extends BaseServiceImpl<MovieDAO, Movie> implement
 		super(dao);
 	}
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/heads/main
