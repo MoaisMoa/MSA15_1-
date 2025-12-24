@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/layout/common.jsp" %>
+<<<<<<< HEAD
 <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="white">
+=======
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" 
+	data-bs-theme="dark">
+>>>>>>> branch 'main' of https://github.com/MoaisMoa/MSA15_1-.git
   <div class="container-fluid">
     <a class="navbar-brand" href="${ root }/">Title</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
