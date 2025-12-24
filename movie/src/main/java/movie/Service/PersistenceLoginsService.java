@@ -1,4 +1,4 @@
-package Service;
+package movie.Service;
 
 import DTO.PersistenceLogins;
 
