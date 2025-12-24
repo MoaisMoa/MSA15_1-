@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-/db.properties
-/movie/
-=======
 /DAO/
 /DTO/
+/SQL/
 /Service/
+/db.properties
+/movie/
 /servlet/
->>>>>>> refs/heads/main
