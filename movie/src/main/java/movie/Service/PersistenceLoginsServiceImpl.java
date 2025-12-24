@@ -1,4 +1,4 @@
-package Service;
+package movie.Service;
 
 import java.util.Calendar;
 import java.util.Date;

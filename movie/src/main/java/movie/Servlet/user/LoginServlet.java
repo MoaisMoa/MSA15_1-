@@ -1,4 +1,4 @@
-package servlet;
+package movie.Servlet.user;
 
 import Service.PersistenceLoginsService;
 import Service.PersistenceLoginsServiceImpl;

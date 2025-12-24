@@ -1,4 +1,4 @@
-package DTO;
+package movie.DTO;
 import java.util.Date;
 import com.alohaclass.jdbc.annotation.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package servlet;
+package movie.Servlet.user;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
