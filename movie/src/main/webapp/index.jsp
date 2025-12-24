@@ -23,12 +23,34 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<<<<<<< HEAD
+	<link rel="stylesheet" href="path-to/node_modules/mdi/css/materialdesignicons.min.css"/>
+	<jsp:include page="/layout/meta.jsp" />
+	<jsp:include page="/layout/link.jsp" />
+=======
   <meta charset="UTF-8">
   <title>영화 사이트</title>
+<<<<<<< HEAD
   <link rel="stylesheet" href="${root}/static/css/main.css">
+=======
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+>>>>>>> branch 'main' of https://github.com/MoaisMoa/MSA15_1-.git
+>>>>>>> refs/heads/main
 </head>
 
 <body>
+<<<<<<< HEAD
+	<jsp:include page="/layout/header.jsp" />
+	<%-- [Contents] ######################################################### --%>
+		
+	
+							
+						
+	
+	<%-- [Contents] ######################################################### --%>
+	<jsp:include page="/layout/footer.jsp" />
+	<jsp:include page="/layout/script.jsp" />
+=======
 
   <!-- 헤더 -->
   <header class="header">
@@ -265,6 +287,11 @@
     <p>© 2025 MOVIE PICK. All rights reserved.</p>
 	<p>영화 데이터 출처: TMDB API</p>
   </footer>
+<<<<<<< HEAD
 <script src="${root}/static/js/main.js"></script>
+=======
+<script src="${pageContext.request.contextPath}/js/main.js"></script>
+>>>>>>> branch 'main' of https://github.com/MoaisMoa/MSA15_1-.git
+>>>>>>> refs/heads/main
 </body>
 </html>

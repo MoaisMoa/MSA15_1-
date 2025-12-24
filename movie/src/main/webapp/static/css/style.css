@@ -5,8 +5,38 @@
 header,
 footer
 {
-	width: var(--container-size);
-	margin: 0 auto;
+	
+}
+
+#search-box {
+	-webkit-box-align: center;
+	align-items: center;
+	background: white;
+	border-radius: 4px;
+	display: -wepkint-box;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	margin: 0.5em 0;
+	padding: 0.5em 0.5em 0.5em 1em;
+	transition: all 0.5s;
+	width: 500px;
+}
+
+#search-box:hover, #search-box:focus {
+	background: white;
+}
+
+#search button, #search input{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: transparent;
+	border: 0;
+	outline: 0;
+}
+
+#search-box button {
+	cursor: pointer;
 }
 
 section {
