@@ -1,7 +1,4 @@
-package movie.Servlet.admin;
-
-import java.io.IOException;
-import java.util.List;
+package board.servlet.admin;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,17 +6,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import movie.DAO.MovieDAO;
-import movie.DTO.Movie;
-import movie.Service.MovieService;
-import movie.Service.MoviesServiceImpl;
+import java.io.IOException;
+import java.util.List;
+
+import board.DTO.Movie;
+import board.Service.MovieService;
+import board.Service.MoviesServiceImpl;
 
 @WebServlet("/admin/movie/*")
 public class MovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private MovieDAO movieDAO = new MovieDAO();
-	private MovieService movieService = new MoviesServiceImpl(movieDAO);
+	private MovieService moviesService = new MoviesServiceImpl();
 	/**
 	 * [get]
 	 */
@@ -33,7 +31,7 @@ public class MovieServlet extends HttpServlet {
 		System.out.println("/admin/movie");
 		// 영화 목록
 		if( path.equals("/list")) {
-			List<Movie> movieList = movieService.list();
+			List<Movie> movieList = moviesService.list();
 			request.setAttribute("movieList", movieList);
 			page = "/page/admin/movie/list.jsp";
 		}
@@ -86,19 +84,19 @@ public class MovieServlet extends HttpServlet {
 
 	        Movie movie = Movie.builder()
 	                .title(title)
-	                .subTitle(subTitle)
+	                .sub_title(subTitle)
 	                .director(director)
 	                .actor(actor)
 	                .country(country)
 	                .description(description)
-	                .imgPath(imgPath)
-	                .playTime(playTime)
-	                .releaseDate(releaseDate)
+	                .img_path(imgPath)
+	                .play_time(playTime)
+	                .release_date(releaseDate)
 	                .build();
 
 
 	        try {
-	            movieService.insert(movie);
+	            moviesService.insert(movie);
 	        } catch(Exception e) {
 	            e.printStackTrace();
 	        }

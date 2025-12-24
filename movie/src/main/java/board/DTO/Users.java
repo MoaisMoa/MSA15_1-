@@ -1,4 +1,4 @@
-package movie.DTO;
+package board.DTO;
 
 import java.util.Date;
 

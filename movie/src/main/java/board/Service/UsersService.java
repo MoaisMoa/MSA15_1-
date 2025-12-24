@@ -1,9 +1,12 @@
-package movie.Service;
+package board.Service;
 
-import movie.DTO.Users;
+import java.util.List;
 
-public interface UsersService extends BaseService<Users> {
+import board.DTO.Users;
 
+public interface UsersService {
+
+	List<Users> list();
 	// 회원가입
 	public int join(Users user);
 	
