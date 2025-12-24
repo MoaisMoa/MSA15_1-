@@ -26,7 +26,7 @@ public class Movie {
     private String country;
     private Date releaseDate;		// 2025/10/12
     private String description;
-    private String createdAt;
+    private Date createdAt;
     private int playTime;
     private String imgPath;
     private String detailImgPath; // 유지

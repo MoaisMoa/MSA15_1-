@@ -11,7 +11,7 @@ CREATE TABLE movie (
     country VARCHAR(100),
     release_date DATE,
     description TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     play_time INT,
     img_path TEXT,
     detail_img_path TEXT,

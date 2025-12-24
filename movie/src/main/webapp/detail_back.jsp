@@ -35,7 +35,7 @@
 <head>
     <meta charset="UTF-8">
     <title>영화 상세페이지 - <%= (movie != null ? movie.getTitle() : "영화 정보 없음") %></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/movieDetail.css">
+    <link rel="stylesheet" href="${root}/static/css/movie/movieDetail.css">
 </head>
 <body>
 
