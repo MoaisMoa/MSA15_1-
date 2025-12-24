@@ -1,4 +1,4 @@
-<%@page import="movie.Service.MoviesServiceImpl"%>
+<%@page import="movie.Service.MovieServiceImpl"%>
 <%@page import="movie.Service.MovieService"%>
 <%@page import="movie.DAO.MovieDAO"%>
 <%@page import="movie.DTO.Movie"%>
@@ -10,7 +10,7 @@
     
 <%
 	MovieDAO movieDAO = new MovieDAO();
-	MovieService movieService = new MoviesServiceImpl(movieDAO);
+	MovieService movieService = new MovieServiceImpl(movieDAO);
 	List<Movie> movieList = null;
 	try {
 		movieList = movieService.list();

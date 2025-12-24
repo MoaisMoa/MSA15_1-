@@ -1,6 +1,6 @@
 package movie.Service;
 
-import DTO.PersistenceLogins;
+import movie.DTO.PersistenceLogins;
 
 public interface PersistenceLoginsService {
 	public PersistenceLogins insert(String username);

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import DAO.PersistenceLoginsDAO;
-import DTO.PersistenceLogins;
+import movie.DAO.PersistenceLoginsDAO;
+import movie.DTO.PersistenceLogins;
 
 public class PersistenceLoginsServiceImpl implements PersistenceLoginsService {
 
