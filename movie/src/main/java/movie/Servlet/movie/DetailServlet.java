@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import movie.DAO.MovieDAO;
 import movie.DTO.Movie;
 import movie.Service.MovieService;
-import movie.Service.MoviesServiceImpl;
+import movie.Service.MovieServiceImpl;
 
 
 @WebServlet("/detail")
@@ -21,7 +21,7 @@ public class DetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private MovieDAO movieDAO = new MovieDAO();
-	private MovieService movieService = new MoviesServiceImpl(movieDAO);
+	private MovieService movieService = new MovieServiceImpl(movieDAO);
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -51,10 +51,3 @@ public class DetailServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
