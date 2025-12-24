@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* ================= 헤더 ================= */
+
+.header {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.header > * {
+	flex-shrink: 0;
+}
+
+
+.right-menu {
+  display: flex;
+  gap: 15px;
+}
+
+/* ================= 검색창 ================= */
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.search {
+  width: 600px;
+  height: 40px;
+  padding: 6px 12px 6px 36px; /* 왼쪽 공간 확보 */
+  border: 2px solid black;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* 얇은 검정 돋보기 원 */
+.search-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border: 1px solid #000;  /* 얇게 */
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* 손잡이: 원 밖으로만 연결 */
+.search-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 22px;   /* 원 바깥쪽에서 시작 */
+  top: 60%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 10px;
+  height: 0.9px;  /* 얇게 */
+  background: #000;  /* 검정색 */
+  transform-origin: left center;
+}
+
+
+.menu-btn {
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  display: inline-block;
+  margin-top: -10px;
+  white-space: nowrap;
+}
+
+.menu-btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+
+.title-link {
+  font-size: 40px;
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+  margin-top: -10px;
+  white-space: nowrap;
+}
+
+.title-link:hover {
+  opacity: 0.8;
+}
+
+footer {
+    bottom: 0;            /* 맨 아래 */
+    left: 0;              /* 좌측 끝 */
+    width: 100%;          /* 전체 너비 */
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    color: #666;
+    z-index: 1000;        /* 다른 요소 위로 올라오게 */
+}
