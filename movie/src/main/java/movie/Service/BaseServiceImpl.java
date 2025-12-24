@@ -67,6 +67,18 @@ public class BaseServiceImpl<D extends BaseDAOImpl<T>, T> implements BaseService
 		}
 		return t;
 	}
+	
+	
+	@Override
+	public T selectBy(Map<String, Object> map) {
+		T t = null;
+		try {
+			t = dao.selectBy(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return t;
+	}
 
 	@Override
 	public boolean insert(T entity) {
