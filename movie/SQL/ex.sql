@@ -12,7 +12,7 @@ CREATE TABLE movie (
     release_date DATE,
     description TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    img_path VARCHAR(100),
+    img_path VARCHAR(1000),
     play_time INT,
     CONSTRAINT pk_movie PRIMARY KEY (movie_id)
 );
@@ -60,4 +60,5 @@ CREATE TABLE movie_genre (
 ALTER TABLE review
 ADD CONSTRAINT uk_review_user_movie UNIQUE (user_id, movie_id);
 
-SELECT * FROM MOVIE
+SELECT * FROM MOVIE;
+SELECT * FROM USERS;

@@ -14,6 +14,7 @@
 	<jsp:include page="/layout/adminsidebar.jsp" />
 	<%-- [Contents] ######################################################### --%>
 	<div class="container">
+	
 		<div style = "position:fixed;
 					  top: 140px;
 					  left : 320px;
@@ -30,36 +31,48 @@
 					  padding: 40px;		  
 					  background-color:white;
 					  border-radius: 30px;
+					  overflow-y:auto;
 					  z-index:1001;
 		">				
 <%---------------------------------------------------------------------- --%>
-<form action="${pageContext.request.contextPath}/MoviesServlet/upload" method="post">
+<form action="${root}/admin/movie/create" method="post">
         <div class="mb-3">
             <label>영화 제목</label>
             <input type="text" name="title" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>소 제목</label>
+            <input type="text" name="sub_title" class="form-control" required>
         </div>
         <div class="mb-3">
             <label>감독</label>
             <input type="text" name="director" class="form-control">
         </div>
         <div class="mb-3">
-            <label>장르</label>
-            <input type="text" name="genre" class="form-control">
+            <label>배우</label>
+            <input type="text" name="actor" class="form-control">
         </div>
         <div class="mb-3">
-            <label>출시일</label>
+            <label>국가</label>
+            <input type="text" name="country" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>개봉일</label>
             <input type="date" name="release_date" class="form-control">
         </div>
         <div class="mb-3">
             <label>내용</label>
-            <textarea name="summary" class="form-control" rows="4"></textarea>
+            <textarea name="description" class="form-control" rows="4"></textarea>
         </div>
-        <%--
         <div class="mb-3">
-            <label>포스터 이미지 URL</label>
-            <input type="text" name="poster_url" class="form-control">
+            <label>포스터</label>
+            <input type="text" name="img_path" class="form-control">
         </div>
-         --%>
+        <div class="mb-3">
+            <label>상영시간</label>
+            <input type="text" name="play_time" class="form-control">
+        </div>
+
         
         <button type="submit" class="btn btn-primary">등록</button>
     </form>

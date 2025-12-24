@@ -8,5 +8,6 @@ import board.DTO.Movie;
 public interface MovieService {
 	
 	List<Movie> list();
+	void insert(Movie movie);
 
 }

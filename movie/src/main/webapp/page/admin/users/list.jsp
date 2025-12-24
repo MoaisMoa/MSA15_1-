@@ -5,18 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>관리자 페이지-영화</title>
+	<title>관리자 페이지 - 유저 목록</title>
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>
-<style>
-	.card-text {
-  max-height: 3em; 
-  line-height: 1.5em;
-  overflow: hidden;
-}
-</style>
 	<jsp:include page="/layout/adminheader.jsp" />
 	<jsp:include page="/layout/adminsidebar.jsp" />
 	<%-- [Contents] ######################################################### --%>
@@ -27,7 +20,7 @@
 					  right: 40px;
 					  ">
 			<h1 style = "font-size:40px;
-						 color: #7D81CA;">영화 관리</h1>
+						 color: #7D81CA;">유저 목록</h1>
 		</div>
 		<div style = "position:fixed;
 					  top: 220px;
@@ -39,42 +32,35 @@
 					  border-radius: 30px;
 					  z-index:1001;
 		">
- <%-------------------------------------------------------------------------- --%>
-    <table class="table table-striped">
+		
+		<%-- 유저 정보 게시판 --%>
+		<table class="table table-striped">
         <thead>
             <tr>
-                <th>제목</th>
-                <th>감독</th>
-                <th>개봉일</th>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>생성일</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="movie" items="${movieList}">
+            <c:forEach var="users" items="${usersList}">
                 <tr style="cursor:pointer;"
-                            onclick="location.href='${root}/admin/movie/'">
-                    <td>${movie.title}</td>
-                    <td>${movie.director}</td>
-                    <td><fmt:formatDate value="${movie.release_date}" pattern="yyyy-MM-dd"/></td>  
+                            onclick="location.href='${root}/admin/users/detail?users_id=${users.users_id}'">        
+                    <td>${users.user_id}</td>
+                    <td>${users.username}</td>
+                    <td>${users.created_at}</td>    
                 </tr>
             </c:forEach>
-            <c:if test="${empty movieList}">
+            <c:if test="${empty userList}">
                 <tr>
-                    <td colspan="3" class="text-center">등록된 영화가 없습니다.</td>
+                    <td colspan="3" class="text-center">가입한 유저가 없습니다.</td>
                 </tr>
             </c:if>
         </tbody>
     </table>
 
-	<div class = "d-flex justify-content-end gap-2"
-	 	  style="margin-right:40px; 
-	 	  ">
-	
-		<a href="${root}/admin/movie/create" 
-		   class="btn btn-lg btn-secondary">추가</a>
-	</div>	
-			 
 
- <%-------------------------------------------------------------------------- --%>
+		<%-- 게시판 끝 --%>
 			</div>
 	</div>
 	
