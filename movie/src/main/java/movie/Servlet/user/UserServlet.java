@@ -7,15 +7,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import movie.DAO.UserDAO;
 import movie.Service.UserService;
 import movie.Service.UserServiceImpl;
 
 
 
-@WebServlet("/UserServlet")
+@WebServlet("/users/*")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserService userService = new UserServiceImpl();
+	private UserDAO userDAO = new UserDAO();
+	private UserService userService = new UserServiceImpl(userDAO);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response
 			) throws ServletException, IOException {

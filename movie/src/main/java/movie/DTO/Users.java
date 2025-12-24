@@ -6,7 +6,10 @@ import com.alohaclass.jdbc.annotation.Column;
 import com.alohaclass.jdbc.annotation.Pk;
 import com.alohaclass.jdbc.annotation.Table;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Table("users")
 @Data
@@ -24,6 +27,8 @@ public class Users {
 	private String passwordConfirm;
 	private String name;
 	private String email;
+	private String birth;
+	private String tel;
 	private Date createdAt;
 	private Date updatedAt;
 }

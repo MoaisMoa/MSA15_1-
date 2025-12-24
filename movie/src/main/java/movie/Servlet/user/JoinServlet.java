@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import movie.DAO.UserDAO;
 import movie.DTO.Users;
 import movie.Service.UserService;
 import movie.Service.UserServiceImpl;
@@ -16,12 +17,14 @@ import movie.Service.UserServiceImpl;
 @WebServlet({"/join","/join.jsp"})
 public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserService userService = new UserServiceImpl();
+	
+	private UserDAO userDAO = new UserDAO();
+	private UserService userService = new UserServiceImpl(userDAO);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response
 			) throws ServletException, IOException {
 		//회원가입 화면
-		String url = "/page/join.jsp";
+		String url = "/page/user/join.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}
