@@ -7,4 +7,4 @@ CREATE TABLE 'aloha'.'users' (
 	'created_at' TIMESTAMP NOT NULL DEFAULT now(),
 	'updated_at' TIMESTAMP NOT NULL DEFAULT now()
 	) COMMENT = '회원';
-	SELECT * FROM users;
+	SELECT * FROM use rs;
