@@ -12,8 +12,9 @@ CREATE TABLE movie (
     release_date DATE,
     description TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    img_path VARCHAR(1000),
     play_time INT,
+    img_path TEXT,
+    detail_img_path TEXT,
     CONSTRAINT pk_movie PRIMARY KEY (movie_id)
 );
 

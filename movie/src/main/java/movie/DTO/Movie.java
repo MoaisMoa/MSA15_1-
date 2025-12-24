@@ -1,8 +1,7 @@
-package board.DTO;
+package movie.DTO;
 
 import java.util.Date;
 
-import com.alohaclass.jdbc.annotation.Column;
 import com.alohaclass.jdbc.annotation.Pk;
 import com.alohaclass.jdbc.annotation.Table;
 
@@ -19,17 +18,17 @@ import lombok.NoArgsConstructor;
 public class Movie {
 
     @Pk
-    private int movie_id;
+    private int movieId;
     private String title;
-    private String sub_title;
+    private String subTitle;
     private String director;
     private String actor;
     private String country;
-    private String release_date;
+    private Date releaseDate;		// 2025/10/12
     private String description;
-    private String created_at;
-    private String img_path;
-    private int play_time;
-    private String detail_img_path; // 유지
+    private String createdAt;
+    private int playTime;
+    private String imgPath;
+    private String detailImgPath; // 유지
 }
 

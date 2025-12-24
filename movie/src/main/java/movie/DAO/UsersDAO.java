@@ -1,8 +1,9 @@
-package board.DAO;
+package movie.DAO;
 
 import com.alohaclass.jdbc.dao.BaseDAOImpl;
 
-import board.DTO.Users;
+import movie.DTO.Users;
+
 
 public class UsersDAO extends BaseDAOImpl<Users> {
 
