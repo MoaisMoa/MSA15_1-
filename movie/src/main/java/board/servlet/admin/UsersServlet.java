@@ -34,27 +34,94 @@ public class UsersServlet extends HttpServlet {
 		System.out.println("/admin/users");
 		// 유저 목록
 		if( path.equals("/list")) {
-			List<Users> moviesList = usersService.list();
-			request.setAttribute("userssList", moviesList);
+			List<Users> usersList = usersService.list();
+			request.setAttribute("usersList", usersList);
 			page = "/page/admin/users/list.jsp";
 		}
-		// 영화 등록
-		if( path.equals("/create")  ) {
-			
-			page = "/page/admin/movie/create.jsp";
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request,  response);
+	RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+	dispatcher.forward(request,  response);
 	}
-
+	
+	
+	/**
+	 * 
+	 * [post]
+	 * 
+	 */
+	
 	protected void doPost(
 			HttpServletRequest request, 
 			HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		String root = request.getContextPath();			
-		String path = request.getPathInfo();
-		
+		   String path = request.getPathInfo();
+
+		    if ("/upload".equals(path)) {
+		        request.setCharacterEncoding("UTF-8");
+
+		        // 폼 데이터 가져오기
+		        String title = request.getParameter("title");
+		        String subTitle = request.getParameter("sub_title");
+		        String director = request.getParameter("director");
+		        String actor = request.getParameter("actor");
+		        String country = request.getParameter("country");
+		        String description = request.getParameter("description");
+		        String imgPath = request.getParameter("img_path");
+
+		        // DTO 생성
+		        Movie movie = Movie.builder()
+		                .title(title)
+		                .sub_title(subTitle)
+		                .director(director)
+		                .actor(actor)
+		                .country(country)
+		                .description(description)
+		                .img_path(imgPath)
+		                .build();
+
+		        // Service 호출
+		        protected void doPost(
+		    			HttpServletRequest request, 
+		    			HttpServletResponse response) 
+		    			throws ServletException, IOException {
+		    		
+		    		   String path = request.getPathInfo();
+
+		    		    if ("/upload".equals(path)) {
+		    		        request.setCharacterEncoding("UTF-8");
+
+		    		        // 폼 데이터 가져오기
+		    		        String title = request.getParameter("title");
+		    		        String subTitle = request.getParameter("sub_title");
+		    		        String director = request.getParameter("director");
+		    		        String actor = request.getParameter("actor");
+		    		        String country = request.getParameter("country");
+		    		        String description = request.getParameter("description");
+		    		        String imgPath = request.getParameter("img_path");
+
+		    		        // DTO 생성
+		    		        Movie movie = Movie.builder()
+		    		                .title(title)
+		    		                .sub_title(subTitle)
+		    		                .director(director)
+		    		                .actor(actor)
+		    		                .country(country)
+		    		                .description(description)
+		    		                .img_path(imgPath)
+		    		                .build();
+
+		    		        // Service 호출
+		    		        MovieService movieService = new MoviesServiceImpl();
+		    		        try {
+		    		            movieService.insert(movie);  // insert 메서드 필요
+		    		        } catch(Exception e) {
+		    		            e.printStackTrace();
+		    		        }
+
+		    		        // 목록 페이지로 이동
+		    		        response.sendRedirect(request.getContextPath() + "/admin/movie/list");
+
+		    	}
 
 	}
 

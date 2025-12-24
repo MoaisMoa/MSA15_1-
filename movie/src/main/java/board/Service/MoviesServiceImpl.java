@@ -23,6 +23,16 @@ public class MoviesServiceImpl implements MovieService {
 		}
 		return list;
 	}
+
+	@Override
+	public void insert(Movie movie) {
+		try {
+			moviesDAO.insert(movie);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 

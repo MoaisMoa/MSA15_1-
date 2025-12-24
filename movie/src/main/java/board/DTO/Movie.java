@@ -25,10 +25,11 @@ public class Movie {
 	private String actor;
 	private String country;
 	private String description;
+	private Date release_date;
 	private Date created_at;
 	private String img_path;
 	private int play_time;
-	private Date updated_at;
+
 
 
 }
