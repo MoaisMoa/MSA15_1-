@@ -11,10 +11,16 @@ CREATE TABLE movie (
     country VARCHAR(100),
     release_date DATE,
     description TEXT,
+<<<<<<< HEAD
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    img_path VARCHAR(1000),
+    play_time INT,
+=======
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     play_time INT,
     img_path TEXT,
     detail_img_path TEXT,
+>>>>>>> branch 'Moa' of https://github.com/MoaisMoa/MSA15_1-.git
     CONSTRAINT pk_movie PRIMARY KEY (movie_id)
 );
 

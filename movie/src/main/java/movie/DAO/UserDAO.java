@@ -1,4 +1,4 @@
-package DAO;
+package movie.DAO;
 import com.alohaclass.jdbc.dao.BaseDAOImpl;
 import DTO.Users;
 
