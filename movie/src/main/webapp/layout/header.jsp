@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/layout/common.jsp" %>
-<<<<<<< HEAD
-
-
 <header class="">
 	<div class="container">
 	<!-- navbar -->
@@ -41,6 +38,7 @@
 			<a class= "nav-link fs-4" aria-current="page" href="/#">영화 토너먼트</a>
 			<a class= "nav-link fs-4" aria-current="page" href="${root}/mypage.jsp">마이페이지</a>
 		<%
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="white">
@@ -83,6 +81,8 @@
         
         <%
 >>>>>>> refs/heads/main
+=======
+>>>>>>> branch 'Moa' of https://github.com/MoaisMoa/MSA15_1-.git
 			}
 		%>
 			</ul>
