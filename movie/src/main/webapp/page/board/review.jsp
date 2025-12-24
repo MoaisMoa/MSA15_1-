@@ -27,7 +27,7 @@
 			<h2>노트북</h2>
 			<div class="text-muted mb-2">The Notebook</div>
 
-			<!-- 메타 정보 -->
+			<!-- 메타 정보나나ㅏ -->
 			<div class="d-flex gap-4 mb-3">
 				<div>
 					<img src="../img/star.png" width="18"> 7.8
