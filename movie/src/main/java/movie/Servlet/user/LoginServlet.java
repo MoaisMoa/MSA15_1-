@@ -1,9 +1,9 @@
 package movie.Servlet.user;
 
-import Service.PersistenceLoginsService;
-import Service.PersistenceLoginsServiceImpl;
-import Service.UserService;
-import Service.UserServiceImpl;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,10 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import DTO.Users;
+import movie.DTO.Users;
+import movie.Service.UserService;
+import movie.Service.UserServiceImpl;
 
 
 

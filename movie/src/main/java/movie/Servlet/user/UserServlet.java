@@ -1,15 +1,14 @@
 package movie.Servlet.user;
 
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-//import DTO.Users;
-import Service.UserService;
-import Service.UserServiceImpl;
+import movie.Service.UserService;
+import movie.Service.UserServiceImpl;
 
 
 

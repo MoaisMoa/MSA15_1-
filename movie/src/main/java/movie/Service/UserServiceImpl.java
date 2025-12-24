@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import DAO.UserDAO;
-import DTO.Users;
+import movie.DAO.UserDAO;
+import movie.DTO.Users;
 
 public class UserServiceImpl implements UserService {
 	private UserDAO userDAO = new UserDAO();

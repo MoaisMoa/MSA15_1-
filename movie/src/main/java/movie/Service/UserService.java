@@ -1,6 +1,6 @@
 package movie.Service;
 
-import DTO.Users;
+import movie.DTO.Users;
 
 public interface UserService {
 	public int join(Users user);
