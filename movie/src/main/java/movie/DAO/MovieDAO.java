@@ -6,5 +6,5 @@ import movie.DTO.Movie;
 
 
 public class MovieDAO extends BaseDAOImpl<Movie> {
-	
+	 
 }
