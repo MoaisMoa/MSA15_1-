@@ -12,17 +12,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import movie.DAO.UserDAO;
 import movie.DTO.Users;
 import movie.Service.UserService;
 import movie.Service.UserServiceImpl;
 
 
 
-@WebServlet("/LoginServlet")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private UserService userService = new UserServiceImpl();
+	private UserDAO userDAO = new UserDAO();
+	private UserService userService = new UserServiceImpl(userDAO);
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response
 			) throws ServletException, IOException {
@@ -44,7 +46,11 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("username", username);
 		request.setAttribute("rememberId", rememberId);
 		
-		page="/page/login.jsp";
+		// 임시 로그인 테스트
+		// HttpSession session = request.getSession();
+		// session.setAttribute("loginId", "Moa");
+		
+		page="/page/user/login.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}

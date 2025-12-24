@@ -2,6 +2,8 @@ package movie.DAO;
 
 import com.alohaclass.jdbc.dao.BaseDAOImpl;
 
-public class UserDAO extends BaseDAOImpl<movie.DTO.Users> {
+import movie.DTO.Users;
+
+public class UserDAO extends BaseDAOImpl<Users> {
 	
 }
