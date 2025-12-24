@@ -1,55 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/layout/common.jsp" %>
-<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" 
-	data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="${ root }/">Home</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
-      </ul>
-       <ul class="navbar-nav d-flex align-items-center px-3">
-       
-       	<%
-			if( loginId == null || loginId.equals("") ) {
-		%>
-       	<!-- 비로그인 시 -->
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="${ root }/login">로그인</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="${ root }/join">회원가입</a>
-        </li>
-        <li class="nav-item">
-        </li>
-        
-        <%
-			}
-        	else {
-        %>
-        <!-- 로그인 시 -->
-        <li class="nav-item">
-        <div class="dropdown">
-	      <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-	        <img src="${root }/static/img/avatar1.png" alt="" width="32" height="32" class="rounded-circle me-2">
-<%-- 	        <strong><%= loginId %></strong> --%>
-	      </a>
-	      <ul class="dropdown-menu dropdown-menu-end text-small shadow">
-	        <li><a class="dropdown-item" href="${ root }/users/my">마이 페이지</a></li>
-	        <li><a class="dropdown-item" href="${ root }/users/update">회원정보 수정</a></li>
-	        <li><hr class="dropdown-divider"></li>
-	        <li><a class="dropdown-item" href="${ root }/logout">로그아웃</a></li>
-	      </ul>
-	    </div>
-        </li>
-        <%
-        	}
-        %>
-      </ul>
-    </div>
+<header class="">
+	<div class="container">
+	<!-- navbar -->
+	<nav class="navbar bg-white navbar-light"> <!-- 기본 네비게이션 바 정의 -->
+		<div class="container-fluid">
+
+			<ul class="navbar-nav d-flex flex-row align-items-center w-100">
+			
+			<!-- Title==홈 -->
+			<li class="nav-item flex-grow-1">
+				<a class="navbar-brand fs-2" aria-current="page" href="${root}">Title</a>
+			</li>
+			
+			<li class="nav-item">
+			<!-- 검색창 -->
+				<form class="d-flex" style= "width: 750px;">
+					<button type="submit" class="search_btn btn-primary border-0"><i class="bi bi-search"></i></button>
+						<input class="form-control flex-grow-1" type="search" placeholder="영화 검색" aria-label="Search">
+				</form>
+
+			<%
+				if(loginId == null || loginId.equals("")) {
+			%>
+			<!-- 영화 토너먼트 / 로그인  (로그인X) -->
+			<li class="nav-item flex-grow-1 d-flex justify-content-end gap-4">
+				<a class="nav-link fs-4" aria-current="page" href="/#">영화 토너먼트</a>
+				<a class="nav-link fs-4" aria-current="page" href="${root}/login">로그인</a>
+				<a class="nav-link fs-4" aria-current="page" href="${root}/join">회원가입</a>
+			</li>
+			
+			<%
+			//로그인 O
+				} else {
+			%>
+			<li class="nav-item flex-grow-1 d-flex justify-content-end gap-4">
+				<a class= "nav-link fs-4" aria-current="page" href="/#">영화 토너먼트</a>
+				<a class= "nav-link fs-4" aria-current="page" href="${root}/mypage.jsp">마이페이지</a>
+				<a class= "nav-link fs-4" aria-current="page" href="${root}/logout">로그아웃</a>
+			<%
+				}
+			%>
+
+				</ul>
+		</div>
+	</nav>
   </div>
-</nav>
+</header>
