@@ -51,7 +51,7 @@
         <tbody>
             <c:forEach var="movie" items="${movieList}">
                 <tr style="cursor:pointer;"
-                            onclick="location.href='${root}/admin/users/detail?users_id=${users.users_id}'">
+                            onclick="location.href='${root}/admin/movie/'">
                     <td>${movie.title}</td>
                     <td>${movie.director}</td>
                     <td><fmt:formatDate value="${movie.release_date}" pattern="yyyy-MM-dd"/></td>  
