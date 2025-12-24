@@ -1,3 +1,5 @@
+<%@ include file="/layout/jstl.jsp" %>
+<%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,7 +36,7 @@
 							
 							<button class="btn btn-primary btn-lg w-100"
 								type="submit" style= "background-color: #7B68EE; border: none;">로그인</button>							
-								<p>회원이 아니신가요? <a href="/#" class="text-decoration-none text-dark">회원가입</a></p>
+								<p>회원이 아니신가요? <a href="${root}/join" class="text-decoration-none text-dark">회원가입</a></p>
 						</div>
 					</div>
 				</div>

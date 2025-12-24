@@ -5,11 +5,15 @@ import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import DAO.UserDAO;
-import DTO.Users;
+import movie.DAO.UserDAO;
+import movie.DTO.Users;
 
-public class UserServiceImpl implements UserService {
-	private UserDAO userDAO = new UserDAO();
+public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements UserService {
+
+	
+	public UserServiceImpl(UserDAO dao) {
+		super(dao);
+	}
 
 	@Override
 	public int join(Users user) {
@@ -19,7 +23,7 @@ public class UserServiceImpl implements UserService {
 			String encodedPassword = BCrypt.hashpw(password,BCrypt.gensalt());
 			user.setPassword(encodedPassword);
 			//회원 등록
-			int result = userDAO.insert(user);
+			int result = dao.insert(user);
 			//등록 성공
 			return result;	
 		} catch (Exception e) {
@@ -35,7 +39,7 @@ public class UserServiceImpl implements UserService {
 		map.put("username", username);
 		Object user = null;
 		try {
-			user = userDAO.selectBy(map);
+			user = dao.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,7 +60,7 @@ public class UserServiceImpl implements UserService {
 		
 		Users joinedUser = null;
 		try {
-			joinedUser = userDAO.selectBy(map);
+			joinedUser = dao.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,7 +80,7 @@ public class UserServiceImpl implements UserService {
 		map.put("username", username);
 		Users user = null;
 		try {
-			user = userDAO.selectBy(map);
+			user = dao.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
