@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tournament.css">
+<link rel="stylesheet" href="${root}/static/css/movie/tournament.css">
 </head>
 <body>
  <header class="header">
