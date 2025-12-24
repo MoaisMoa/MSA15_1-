@@ -1,3 +1,5 @@
+.project
+*/.project
 build/
 # Compiled class file
 *.class
