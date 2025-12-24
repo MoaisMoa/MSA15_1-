@@ -1,4 +1,3 @@
-/movie/
 /board/
-/DTO/
-/DAO/
+/db.properties
+/movie/
