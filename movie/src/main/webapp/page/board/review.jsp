@@ -66,7 +66,7 @@
 		</div>
 	</div>
 
-	<!-- 관람평 -->
+	<!-- 관람평 아사사 -->
 	<div class="mt-5">
 		<div class="d-flex justify-content-between align-items-center mb-3">
 			<h5>관람평 (1)</h5>
