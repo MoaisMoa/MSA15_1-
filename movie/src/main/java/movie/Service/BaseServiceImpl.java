@@ -29,6 +29,17 @@ public class BaseServiceImpl<D extends BaseDAOImpl<T>, T> implements BaseService
 	}
 
 	@Override
+	public List<T> listBy(Map<String, Object> map) {
+		List<T> list = null;
+		try {
+			list = dao.listBy(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
 	public PageInfo<T> page(int page, int pageSize) {
 		PageInfo<T> pageInfo = null;
 		try {
