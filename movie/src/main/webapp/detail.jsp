@@ -23,6 +23,8 @@
 	<h2>개봉연도 : (<fmt:formatDate value="${movie.releaseDate}" pattern="yyyy"/>)</h1>
 	<h2>설명 : ${ movie.description }</h1>
 	<h2>상영시간 : ${ movie.playTime }분</h1>
-
+	
+	<!-- 리뷰보기 버튼 -->
+	<a href="${root}/review?id=${movie.movieId}">리뷰보기</a>
 </body>
 </html>
