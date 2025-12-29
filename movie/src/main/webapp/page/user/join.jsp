@@ -52,19 +52,6 @@
             <input type="text" name="name" class="form-control form-control-lg" placeholder="이름" required>
           </div>
 			
-			<!-- 전화번호 -->
-          <div class="form-row">
-              <select name="tel1" class="join-input">
-                <option value="010">010</option>
-                <option value="011">011</option>
-                <option value="016">016</option>
-                <option value="017">017</option>
-                <option value="019">019</option>
-              </select>
-            <input type="text" name="tel2" class="join-input" required>
-  			<input type="text" name="tel3" class="join-input" required>
-            </div>
-           
             <!-- 이메일 -->
           <div class="input-group mb-3">
             <input name="mail1" class="form-control" required>
@@ -90,25 +77,26 @@
             </div>
           </div>
         
+			<!-- 전화번호 -->
+          <div class="form-row">
+              <select name="tel1" class="join-input">
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="017">017</option>
+                <option value="019">019</option>
+              </select>
+            <input type="text" name="tel2" class="join-input" required>
+  			<input type="text" name="tel3" class="join-input" required>
+          </div>
+            
 			<!-- 완료 버튼 -->
 			<button type="submit" class="btn-purple">완료</button>
 		</form>
 	</div>
-	<!-- 아이디 중복 확인 모달 -->
-<div class="modal fade" id="idCheckModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title">아이디 확인</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-    </div>
-  </div>
-</div>
 </main>
 	
-	<jsp:include page="/layout/footer.jsp"/>
+<jsp:include page="/layout/footer.jsp"/>
 <jsp:include page="/layout/script.jsp"/>
 
 <script>
@@ -164,31 +152,6 @@
 	  }
 	  return true;
 	}
-	
-	//아이디 중복체크 여부
-	// function checkId() {
-	//     const userId = document.getElementById("usernam").value;
-	
-	//     if (!username) {
-	//         showModal("아이디를 입력해주세요.");
-	//         return;
-	//     }
-	
-	//     fetch("${root}/id-check?username=" + encodeURIComponent(userId))
-	//         .then(response => response.text())
-	//         .then(result => {
-	//             if (result === "duplicate") {
-	//                 showModal("아이디 중복입니다.");
-	//             } else if (result === "available") {
-	//                 showModal("아이디 사용 가능합니다.");
-	//             } else {
-	//                 showModal("아이디 확인 중 오류가 발생했습니다.");
-	//             }
-	//         })
-	//         .catch(() => {
-	//             showModal("서버와 통신할 수 없습니다.");
-	//         });
-	// }
 </script>
 
 

@@ -2,6 +2,7 @@ package movie.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -12,29 +13,24 @@ public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements 
 
 public UserServiceImpl(UserDAO dao) {
 		super(dao);
-		
 	}
-
-
-private UserDAO userDAO = new UserDAO();
 
 	@Override
 	public int signup(Users user) {
 		
-		//username(로그인ID) 중복체크
-//		if(idCheck(user.getUsername())) {
-//			throw new IllegalStateException("이미 사용 중인 아이디 입니다");
-//		}
-//		user.setUsername(UUID.randomUUID().toString());
-		
-//		if(user.getRole()==null||user.getRole().isEmpty()) {
-//			user.setRole("USER");
-//		}
-//		userDAO.insert(user);
 		try {
+			user.setId(UUID.randomUUID().toString());
+			String username = user.getUsername();
 			String password = user.getPassword();
-			String encodedPassword = BCrypt.hashpw(password,BCrypt.gensalt());
+			String encodedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 			user.setPassword(encodedPassword);
+			user.setUsername(username);
+			//회원 등록
+			System.out.println("signup 비밀번호 암호화 햇다!");
+//			int result = dao.insert(user);
+			System.out.println("DEBUG username = " + user.getUsername());
+			//등록 성공
+			return dao.insert(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,11 +77,11 @@ private UserDAO userDAO = new UserDAO();
 		boolean result = BCrypt.checkpw(password, joinedPassword);
 		return result;
 	}
-	
+
 	@Override
 	public Users selectByUsername(String username) {
-		Map<String,Object> map = new HashMap<>();
-		map.put("username", username);
+		Map<String, Object> map = new HashMap<>();
+		map.put("username",username);
 		Users user = null;
 		try {
 			user = dao.selectBy(map);

@@ -14,7 +14,7 @@ import movie.Service.UserServiceImpl;
 import java.io.IOException;
 import java.util.UUID;
 
-@WebServlet({"/join","/join.jsp"})
+@WebServlet({"/join"})
 public class SignUpServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -28,17 +28,19 @@ public class SignUpServlet extends HttpServlet {
     	String url = "/page/user/join.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	try {
     		String root     = request.getContextPath();
     		String username = request.getParameter("username");
         	String password = request.getParameter("password");
         	String name     = request.getParameter("name");
+        	
+        	System.out.println("#### username : "+ username);
         	
         //이메일 조립
         	String email = request.getParameter("mail1") + "@" +
@@ -50,10 +52,9 @@ public class SignUpServlet extends HttpServlet {
 				   		   request.getParameter("tel3");
 			
 		//생년월일 조립
-			String birth = request.getParameter("birthyy") + "-" +
-						   request.getParameter("birthmm") + "-" +
-						   request.getParameter("birthdd");
-			
+			String birth = request.getParameter("birthhhyy") + "-" +
+						   request.getParameter("birthhhmm") + "-" +
+						   request.getParameter("birthhhdd");
 			
 		//user 객체 생성
 	    	Users user = Users.builder()
@@ -65,18 +66,24 @@ public class SignUpServlet extends HttpServlet {
 					  		  .birth(birth) 	  //생년월일
 					  		  .tel(tel)			  //전화번호
 					  		  .build();
-			
-			int result = userService.signup(user);
-	
-
-//			userService.signup(user);
-			if(result>0) {
-				//성공 => 로그인 페이지로 이동
-				response.sendRedirect(root + "/page/user/join-success.jsp");
-			} else {
-				//실패 => 다시 회원가입 페이지로 이동
-				response.sendRedirect(root + "/page/user/join-failed.jsp");
-			}
+	    	int result = userService.signup(user);
+	    	System.out.println("DEBUG username = " + user.getUsername());
+//	    	response.sendRedirect(root + "/page/user/join-success.jsp");
+	    	if(result > 0) {
+	    		response.sendRedirect(request.getContextPath() + "/page/user/join-success.jsp");
+	    	} else {
+	    		response.sendRedirect(root + "/join.jsp?error=true");
+	    	}
+	    	
+		} catch (IllegalArgumentException e) {
+			request.setAttribute("error",e.getMessage());
+			request.getRequestDispatcher("/page/user/join-failed.jsp").forward(request, response);
+		} catch (Exception e) {
+			//이 친구는 모든 오류 다 받아
+			//실패 => 다시 회원가입 페이지로 이동
+			response.sendRedirect(request.getContextPath() +  "/page/user/join-failed.jsp");
+			e.printStackTrace();
+		}
     }
 }
     	
@@ -95,19 +102,11 @@ public class SignUpServlet extends HttpServlet {
 //				  .password(password) //비밀번호
 //				  .name(name) 		  //실명
 //				  .tel(tel)			  //전화번호
-//				  .email(email)								  //이메일
+//				  .email(email)		  //이메일
 //				  .build();
     	
 //    	int result = userService.signup(user);
 //    	
-//		if(result>0) {
-//			//성공 => 로그인 페이지로 이동
-//			response.sendRedirect(root + "/join-success.jsp");
-//		} else {
-//			//실패 => 다시 회원가입 페이지로 이동
-//			response.sendRedirect(root + "/join-failed.jsp");
-//		}
-//	}
 //    	if(result>0) {
 //			//성공 => 로그인 페이지로 이동
 //			response.sendRedirect(root + "/join-success.jsp");

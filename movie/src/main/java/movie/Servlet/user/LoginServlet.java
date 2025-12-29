@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
 					  .username(username)
 					  .password(password)
 					  .build();
-	boolean result = userService.login(user);
+	boolean result = userService.insert(user);
 	
 	//로그인 실패
 	if(!result) {
@@ -106,7 +106,7 @@ public class LoginServlet extends HttpServlet {
 	
 	//로그인 성공
 	//회원 조회
-	Users loginUser = userService.selectByUsername(username);
+	Users loginUser = userService.selectById(username);
 	loginUser.setPassword(null);
 	
 	//session에 사용자 정보 등록
