@@ -24,11 +24,11 @@ public class Movie {
     private String director;
     private String actor;
     private String country;
-    private Date releaseDate;		// 2025/10/12
+    private Date releaseDate;		
     private String description;
     private Date createdAt;
     private int playTime;
     private String imgPath;
-    private String detailImgPath; // 유지
+    private String detailImgPath; 
 }
 

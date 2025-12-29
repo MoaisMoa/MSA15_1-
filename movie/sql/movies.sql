@@ -39,7 +39,7 @@
 SELECT movie_id, title, detail_img_path, img_path FROM movie WHERE movie_id = 1;
 
 
-SELECT * FROM movie_genre
+SELECT * FROM movie
 =======
 -- ==========================
 -- 영화 샘플 데이터 INSERT
@@ -64,6 +64,7 @@ VALUES
 (5, '서울의 봄', 'Spring in Seoul', '홍길동', '배우1, 배우2', '한국', '2020-05-01', '서울의 봄을 배경으로 한 감성 드라마', '/static/img/movie/서울의봄.jpg', 120),
 (8, '야당', 'The Opposition', '김감독', '배우A, 배우B', '한국', '2019-09-10', '정치적 긴장을 다룬 사회 드라마', '/static/img/movie/야당.jpg', 135),
 (15, '한산', 'Hansan', '김한산', '배우X, 배우Y', '한국', '2022-07-27', '임진왜란을 배경으로 한 전쟁 액션 영화', '/static/img/movie/한산.jpg', 138);
+
 
 -- ==========================
 -- 영화 장르 INSERT
@@ -96,3 +97,8 @@ UPDATE movie
 SET detail_img_path = '한산세로.jpg'
 WHERE movie_id = 15;
 >>>>>>> branch 'Moa' of https://github.com/MoaisMoa/MSA15_1-.git
+
+
+
+
+

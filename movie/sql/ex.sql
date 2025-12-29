@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 INSERT INTO movie (movie_id, title, sub_title, director, actor, country, release_date, description, img_path, play_time)
 VALUES
 (7, '아바타 : 불과 재', 'Avatar: Fire and Ash', '제임스 카메론', '샘 워싱턴, 조 샐다나', '미국', '2025-12-17', '판도라를 위협하는 재의 부족, 더 이상 인간만이 적이 아니다! 모두의 운명을 뒤흔들 거대한 전투가 시작된다! 인간들과의 전쟁으로 첫째 아들 ‘네테이얌’을 잃은 후, ‘제이크’와 ‘네이티리’는 깊은 슬픔에 빠진다. 상실에 빠진 이들 앞에 ''바랑''이 이끄는 재의 부족이 등장하면서, 판도라는 더욱 큰 위험에 빠지게 되고, ‘설리’ 가족은 선택의 기로에 서게 되는데…', '/static/img/movie/아바타.jpg', 197),
@@ -82,4 +82,56 @@ ADD CONSTRAINT uk_review_user_movie UNIQUE (user_id, movie_id);
 
 SELECT * FROM MOVIE;
 SELECT * FROM USERS;
->>>>>>> refs/heads/main
+>>>>>>> refs/heads/main*/
+--UPDATE movie
+--SET release_date = '2023-11-22'
+--WHERE movie_id = 5;
+--INSERT IGNORE INTO movie_genre (movie_id, genre)
+--VALUES
+--(1, 'SF'),
+--(2, '미스터리'),
+--(3, '액션'),
+--(4, '액션'),
+--(5, '드라마'),
+--(6, '판타지'),
+--(7, 'SF'),
+--(8, '범죄'),
+--(9, '스릴러'),
+--(10, '드라마'),
+--(11, '애니메이션'),
+--(12, '애니메이션'),
+--(13, '미스터리'),
+--(14, '공포'),
+--(15, '액션');
+
+--INSERT IGNORE INTO movie_genre (movie_id, genre)
+--VALUES
+--(1, 'SF'),
+--(2, '미스터리'),
+--(3, '액션'),
+--(4, '액션'),
+--(5, '드라마'),
+--(6, '판타지'),
+--(7, 'SF'),
+--(8, '범죄'),
+--(9, '스릴러'),
+--(10, '드라마'),
+--(11, '애니메이션'),
+--(12, '애니메이션'),
+--(13, '미스터리'),
+--(14, '공포'),
+--(15, '액션');
+
+
+--INSERT INTO movie (movie_id, title, sub_title, director, actor, country, release_date, description, img_path, play_time)
+--VALUES
+--(16, '만약에 우리', 'Once We Were Us', '김도영', '구교환, 문가영', '대한민국', '2025-12-31', '"가장 초라했던 그때, 가장 눈부시던 우리" 고향 가는 고속버스에 올라탄 은호(구교환)와 휴학 후 어디론가 떠날 결심을 한 정원(문가영), 나란히 앉게 된 두 사람은 뜻밖의 인연을 맺는다. 서로의 꿈을 응원하며 의지하던 두 사람은 어느새 일상 깊숙이 스며들어 연인으로 발전한다. 웃고, 싸우고, 화해하며 세상을 다 가진 듯 뜨겁게 사랑하지만, 현실의 벽 앞에 두 사람은 결국 다른 길을 선택하게 된다. 그렇게 10년이 지난 후, 다시 마주한 순간 은호는 정원에게 오랫동안 묻어두었던 한마디를 꺼낸다. “만약에 우리...”', '115 ''/static/img/movie/만약에우리.jpg', 115);
+
+UPDATE movie
+SET detail_img_path = '/static/img/movie/만약에우리.jpg'
+WHERE movie_id = 16;
+
+
+
+
+
