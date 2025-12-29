@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import movie.Service.PersistenceLoginsService;
+import movie.Service.PersistenceLoginsServiceImpl;
 
 import java.io.IOException;
 
@@ -14,27 +16,36 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response
-			) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// url : /users/idCheck
 		String root = request.getContextPath();
+		
+		// /logout - 로그아웃
+		System.out.println("로그아웃...");
 		HttpSession session = request.getSession();
 		
-		//모든 쿠키 제거
-		Cookie usernameCookie = new Cookie("username","");
-		Cookie tokenCookie = new Cookie("token","");
-		Cookie[] deleteCookies = {usernameCookie,tokenCookie};
-		for(int i=0; i<deleteCookies.length; i++) {
+		// 쿠키 제거
+		// - 자동 로그인, 토큰
+		Cookie rememberMeCookie = new Cookie("rememberMe", "");
+		Cookie tokenCookie = new Cookie("token", "");
+		Cookie[] deleteCookies = { rememberMeCookie, tokenCookie };
+		for (int i = 0; i < deleteCookies.length; i++) {
 			Cookie cookie = deleteCookies[i];
-			cookie.setPath("/");
+			cookie.setPath(root);
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
-		session.invalidate();
-		response.sendRedirect(root+"/"); //로그아웃 후 메인화면으로 이동
+		
+		// 자동 로그인 토큰 삭제
+		PersistenceLoginsService persistenceLoginsService = new PersistenceLoginsServiceImpl();
+		String username = (String) session.getAttribute("username");
+		persistenceLoginsService.delete(username);
+		
+		session.invalidate();				// 세션 속성 모두 제거 : 세션 무효화
+		response.sendRedirect(root + "/");	// 메인 화면으로 이동
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response
-			) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 }

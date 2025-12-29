@@ -19,10 +19,9 @@ import movie.Service.UserServiceImpl;
 
 
 
-@WebServlet("/login")
+@WebServlet({"/login", "/login.jsp"})
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+	
 	private UserDAO userDAO = new UserDAO();
 	private UserService userService = new UserServiceImpl(userDAO);
 	
@@ -46,15 +45,15 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("username", username);
 		request.setAttribute("rememberId", rememberId);
 		
-		// 임시 로그인 테스트
-		// HttpSession session = request.getSession();
-		// session.setAttribute("loginId", "Moa");
+//		 임시 로그인 테스트
+//		 HttpSession session = request.getSession();
+//		 session.setAttribute("username", "Moa");
 		
 		page="/page/user/login.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response
 			) throws ServletException, IOException {
@@ -101,7 +100,7 @@ public class LoginServlet extends HttpServlet {
 	
 	//로그인 실패
 	if(!result) {
-		response.sendRedirect(root+"/login.jsp?error=true");
+		response.sendRedirect(root+"/login_failed.jsp?error=true");
 		return;
 	}
 	

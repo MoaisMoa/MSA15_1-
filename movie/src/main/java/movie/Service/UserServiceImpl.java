@@ -10,26 +10,34 @@ import movie.DTO.Users;
 
 public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements UserService {
 
-	
-	public UserServiceImpl(UserDAO dao) {
+public UserServiceImpl(UserDAO dao) {
 		super(dao);
+		
 	}
 
+
+private UserDAO userDAO = new UserDAO();
+
 	@Override
-	public int join(Users user) {
+	public int signup(Users user) {
+		
+		//username(로그인ID) 중복체크
+//		if(idCheck(user.getUsername())) {
+//			throw new IllegalStateException("이미 사용 중인 아이디 입니다");
+//		}
+//		user.setUsername(UUID.randomUUID().toString());
+		
+//		if(user.getRole()==null||user.getRole().isEmpty()) {
+//			user.setRole("USER");
+//		}
+//		userDAO.insert(user);
 		try {
-			//비밀번호 암호화
 			String password = user.getPassword();
 			String encodedPassword = BCrypt.hashpw(password,BCrypt.gensalt());
 			user.setPassword(encodedPassword);
-			//회원 등록
-			int result = dao.insert(user);
-			//등록 성공
-			return result;	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//등록 실패
 		return 0;
 	}
 
@@ -73,7 +81,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements 
 		boolean result = BCrypt.checkpw(password, joinedPassword);
 		return result;
 	}
-
+	
 	@Override
 	public Users selectByUsername(String username) {
 		Map<String,Object> map = new HashMap<>();
