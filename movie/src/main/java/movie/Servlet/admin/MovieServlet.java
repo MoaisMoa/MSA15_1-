@@ -28,7 +28,7 @@ public class MovieServlet extends HttpServlet {
 			HttpServletResponse response
 			) throws ServletException, IOException {
 		String path = request.getPathInfo();
-		String page = "";
+		String page = "null";
 		System.out.println(path);
 		System.out.println("/admin/movie");
 		// 영화 목록

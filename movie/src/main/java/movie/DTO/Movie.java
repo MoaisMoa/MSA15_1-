@@ -1,6 +1,7 @@
 package movie.DTO;
 
 import java.util.Date;
+import java.util.List;
 
 import com.alohaclass.jdbc.annotation.Column;
 import com.alohaclass.jdbc.annotation.Pk;
@@ -32,6 +33,11 @@ public class Movie {
     private String imgPath;
     private String detailImgPath; // 유지
 
+    
+    // 장르 추가
+    @Column(exist = false)
+    private List<String> genres;
+    
     // 계산된 평균 평점
     @Column(exist = false)
     private double averageRating;

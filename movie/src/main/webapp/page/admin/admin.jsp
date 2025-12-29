@@ -20,7 +20,7 @@
 					  right: 40px;
 					  ">
 			<h1 style = "font-size:40px;
-						 color: #7D81CA;">유저 관리</h1>
+						 color: #7D81CA;">관리자 사이트</h1>
 		</div>
 		<div style = "position:fixed;
 					  top: 220px;

@@ -13,22 +13,22 @@ CREATE TABLE movie (
     description TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     img_path VARCHAR(1000),
+    detail_img_path VARCHAR(200),
     play_time INT,
     CONSTRAINT pk_movie PRIMARY KEY (movie_id)
 );
 
 CREATE TABLE users (
-    user_id INT AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(10) DEFAULT 'USER',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    gender CHAR(1),
-    email VARCHAR(150),
-    user_img_path VARCHAR(100),
-    CONSTRAINT pk_users PRIMARY KEY (user_id),
-    CONSTRAINT uk_users_username UNIQUE (username),
-    CONSTRAINT uk_users_email UNIQUE (email)
+	no INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	id VARCHAR(64) NOT NULL UNIQUE,
+	username VARCHAR(100) NOT NULL,
+	password VARCHAR(100) NOT NULL,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(100) NULL,
+	birth VARCHAR(100) NULL,
+	tel   VARCHAR(100) NULL,
+	created_at TIMESTAMP NOT NULL DEFAULT now(),
+	updated_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
 CREATE TABLE review (
@@ -44,7 +44,7 @@ CREATE TABLE review (
         REFERENCES movie (movie_id)
         ON DELETE CASCADE,
     CONSTRAINT fk_review_user FOREIGN KEY (user_id)
-        REFERENCES users (user_id)
+        REFERENCES users (no)
         ON DELETE CASCADE
 );
 
