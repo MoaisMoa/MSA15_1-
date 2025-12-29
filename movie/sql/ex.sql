@@ -34,7 +34,7 @@ CREATE TABLE users (
 CREATE TABLE review (
     review_id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
-    rating DECIMAL(2,1),
+    rating DECIMAL(3,1),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME,
     movie_id INT NOT NULL,
