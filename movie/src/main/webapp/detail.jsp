@@ -11,23 +11,29 @@
 <%@ include file="/layout/common.jsp" %>
 
 <%
-    String idParam = request.getParameter("id");
-
-    if (idParam == null) {
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
-        return;
-    }
-
-    Long movieId = Long.parseLong(idParam);
+	String idParam = request.getParameter("id");
+	
+	if (idParam == null || idParam.trim().isEmpty()) {
+	    out.println("<script>alert('영화 ID가 전달되지 않았습니다.'); location.href='index.jsp';</script>");
+	    return;
+	}
+	
+	Long movieId = null;
+	try {
+	    movieId = Long.parseLong(idParam);
+	} catch (NumberFormatException e) {
+	    out.println("<script>alert('올바른 영화 ID가 아닙니다.'); location.href='index.jsp';</script>");
+	    return;
+	}
 
     MovieDAO movieDAO = new MovieDAO();
     MovieService movieService = new MovieServiceImpl(movieDAO);
 
     Movie movie = null;
-    List<Movie> movieList = null; // 전체 영화 리스트
+    List<Movie> movieList = null;
     try {
         movie = movieService.select(movieId);
-        movieList = movieService.list(); // header 검색 기능용
+        movieList = movieService.list();
     } catch (Exception e) {
         e.printStackTrace();
     }
@@ -40,6 +46,7 @@
     request.setAttribute("movie", movie);
     request.setAttribute("movieList", movieList);
 %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
