@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       banner.addEventListener('click', (e) => {
         e.preventDefault();
         const movieId = banner.dataset.id;
-        location.href = contextPath + `/detail.jsp?id=${movieId}`;
+        location.href = contextPath + `/detail?id=${movieId}`;
       });
     });
 
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const realIndex = bannerIndex % bannerCount;
         const movieId = banners[realIndex].dataset.id;
-        location.href = contextPath + `/detail.jsp?id=${movieId}`;
+        location.href = contextPath + `/detail?id=${movieId}`;
       });
     }
   }
@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       movieTimer = setInterval(() => {
         movieIndex += step;
         if (movieIndex >= movieCount) {
+			
           movieIndex = 0;
           moveMovie(movieIndex, false);
         } else {
@@ -160,29 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
       moveMovie(movieIndex, true);
       startMovie();
     };
-  }
-
-  // ===================== 영화 검색 기능 =====================
-  const searchInput = document.getElementById('movieSearchInput');
-  const searchBtn = document.getElementById('movieSearchBtn');
-
-  if (searchInput && searchBtn && typeof movies !== 'undefined') {
-      searchBtn.addEventListener('click', () => {
-          const query = searchInput.value.trim().toLowerCase();
-          if (!query) return;
-
-          const movie = movies.find(m => m.title.toLowerCase().includes(query));
-          if (movie) {
-              window.location.href = `${contextPath}/detail.jsp?id=${movie.id}`;
-          } else {
-              alert('검색된 영화가 없습니다.');
-          }
-      });
-
-      // Enter 키 입력 시 검색
-      searchInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') searchBtn.click();
-      });
   }
 
 

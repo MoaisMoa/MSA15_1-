@@ -37,31 +37,32 @@
 
 <!-- ================= 메인 배너 ================= -->
 <section class="main-banner">
-  <div class="banner-track">
-    <a href="#" class="banner-link" data-id="8">
-      <img src="${root}/static/img/movie/야당.jpg" alt="야당">
-    </a>
-    <a href="#" class="banner-link" data-id="1">
-      <img src="${root}/static/img/movie/인터스텔라.jpg" alt="인터스텔라">
-    </a>
-    <a href="#" class="banner-link" data-id="5">
-      <img src="${root}/static/img/movie/서울의봄.jpg" alt="서울의봄">
-    </a>
-    <a href="#" class="banner-link" data-id="15">
-      <img src="${root}/static/img/movie/한산.jpg" alt="한산">
-    </a>
-  </div>
+    <div class="banner-track">
+        <a href="${root}/movie/detail?id=8" class="banner-link" data-id="8">
+            <img src="${root}/static/img/movie/야당.jpg" alt="야당">
+        </a>
+        <a href="${root}/movie/detail?id=1" class="banner-link" data-id="1">
+            <img src="${root}/static/img/movie/인터스텔라.jpg" alt="인터스텔라">
+        </a>
+        <a href="${root}/movie/detail?id=5" class="banner-link" data-id="5">
+            <img src="${root}/static/img/movie/서울의봄.jpg" alt="서울의봄">
+        </a>
+        <a href="${root}/movie/detail?id=15" class="banner-link" data-id="15">
+            <img src="${root}/static/img/movie/한산.jpg" alt="한산">
+        </a>
+    </div>
 
-  <a href="#" class="detail-btn">상세페이지</a>
+    <a href="#" class="detail-btn">상세페이지</a>
 
-  <div class="banner-progress-wrapper">
-    <div class="banner-progress"></div>
-  </div>ㅛ
+    <div class="banner-progress-wrapper">
+        <div class="banner-progress"></div>
+    </div>
 
-  <!-- 좌우 버튼 -->
-  <button class="banner-btn prev">〈</button>
-  <button class="banner-btn next">〉</button>
+    <!-- 좌우 버튼 -->
+    <button class="banner-btn prev">〈</button>
+    <button class="banner-btn next">〉</button>
 </section>
+
 
 
 <!-- ================= 영화 목록 ================= -->
@@ -70,10 +71,10 @@
   <div class="movie-list">
     <c:forEach var="movie" items="${movieList}">
       <div class="movie">
-        <a href="${root}/detail.jsp?id=${movie.movieId}" class="movie-link">
+        <a href="${root}/detail?id=${movie.movieId}" class="movie-link">
           <img src="${root}${movie.detailImgPath}" alt="${movie.title}">
         </a>
-        <a href="${root}/detail.jsp?id=${movie.movieId}" class="movie-text-link">
+        <a href="${root}/detail?id=${movie.movieId}" class="movie-text-link">
           <div class="movie-info">
             <span class="movie-title">${movie.title}</span>
             <span class="movie-year">
@@ -88,6 +89,7 @@
 </section>
 
 <jsp:include page="/layout/footer.jsp" />
+<jsp:include page="/layout/script.jsp" />
 
 <!-- JSP에서 JS로 영화 데이터 전달 -->
 <script>
@@ -99,8 +101,7 @@
   ];
 </script>
 
-<!-- 메인 JS -->
-<script src="${root}/static/js/main.js"></script>
+
 
 </body>
 </html>
