@@ -33,7 +33,7 @@
 
 <body>
 
-<jsp:include page="/header.jsp" />
+<jsp:include page="/layout/header.jsp" />
 
 <!-- ================= 메인 배너 ================= -->
 <section class="main-banner">
@@ -56,7 +56,7 @@
 
   <div class="banner-progress-wrapper">
     <div class="banner-progress"></div>
-  </div>
+  </div>ㅛ
 
   <!-- 좌우 버튼 -->
   <button class="banner-btn prev">〈</button>

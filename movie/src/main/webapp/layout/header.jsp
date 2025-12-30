@@ -15,7 +15,22 @@
 
   <div class="right-menu">
     <a href="${root}/tournament.jsp" class="menu-btn">영화 토너먼트</a>
-    <a href="${root}/mypage.jsp" class="menu-btn">마이페이지</a>
+    
+    <!-- 로그인 X -->
+    <%
+    	if(username == null || username.equals("")) {
+    %>
+    	<a class="menu-btn"  href="${root}/login">로그인</a>
+    	<a class="menu-btn"  href="${root}/join">회원가입</a>
+    <!-- 로그인 O -->
+    <%
+    	} else {
+    %>
+	    <a href="${root}/mypage" class="menu-btn">마이페이지</a>
+    	<a class="menu-btn" aria-current="page" href="${root}/logout">로그아웃</a>
+    <%
+    	}
+    %>
   </div>
 </header>
 
