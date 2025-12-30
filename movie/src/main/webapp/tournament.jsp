@@ -71,7 +71,7 @@ const movies = [
 		</div>
 	</section>
 	
-	<jsp:include page="/layout/footer.jsp" />
+	<jsp:include page="/footer.jsp" />
 	
 	<script>
 	document.addEventListener('DOMContentLoaded', () => {

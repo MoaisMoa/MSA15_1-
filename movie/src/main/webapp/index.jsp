@@ -88,7 +88,7 @@
   <button class="arrow right">〉</button>
 </section>
 
-<jsp:include page="/layout/footer.jsp" />
+<jsp:include page="/footer.jsp" />
 <jsp:include page="/layout/script.jsp" />
 
 <!-- JSP에서 JS로 영화 데이터 전달 -->
@@ -98,7 +98,7 @@
     <c:forEach var="movie" items="${movieList}" varStatus="s">
       { id: ${movie.movieId}, title: "${movie.title}" }<c:if test="${!s.last}">,</c:if>
     </c:forEach>
-  ];
+  ]; 
 </script>
 
 

@@ -86,7 +86,7 @@
     </div>
 </div>
 
-<jsp:include page="/layout/footer.jsp" />
+<jsp:include page="/footer.jsp" />
 
 <!-- header.jsp에 이미 들어있는 검색 JS가 movies 배열을 사용 -->
 <script src="${root}/static/js/main.js"></script>
