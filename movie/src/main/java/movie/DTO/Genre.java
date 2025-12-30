@@ -1,7 +1,5 @@
 package movie.DTO;
 
-import java.util.Date;
-
 import com.alohaclass.jdbc.annotation.Pk;
 import com.alohaclass.jdbc.annotation.Table;
 
@@ -15,10 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class genre {
+public class Genre {
 
     @Pk
-    private int movieId;
-    private String genre;
+    private int movieId;   // movie_id 컬럼
+    private String genre;  // genre 컬럼
 }
-

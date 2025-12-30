@@ -4,9 +4,12 @@
 <%@page import="movie.Service.MovieService"%>
 <%@page import="movie.DAO.MovieDAO"%>
 <%@page import="movie.DTO.Movie"%>
-<%@page import="movie.DTO.genre" %>
 <%@page import="java.util.List" %>
-
+<%@page import="movie.Service.GenreServiceImpl"%>
+<%@page import="movie.Service.GenreService"%>
+<%@page import="movie.DAO.GenreDAO"%>
+<%@page import="movie.DTO.Genre"%>
+<%@page import="java.util.List" %>
 <%@ include file="/layout/jstl.jsp" %>
 <%@ include file="/layout/common.jsp" %>
 
@@ -91,7 +94,11 @@
         <ul class="movie-meta">
             <li><strong>개봉:</strong> <fmt:formatDate value="${movie.releaseDate}" pattern="yyyy년 MM월 dd일"/></li>
             <li><strong>시간:</strong> ${movie.playTime}분</li>
-            <li><strong>국가:</strong> ${movie.country}</li>
+            <li><strong>장르:</strong>
+			    <c:forEach var="g" items="${movie.genres}" varStatus="status">
+			        ${g.genre}<c:if test="${!status.last}">, </c:if>
+			    </c:forEach>
+			</li>
             <li><strong>감독:</strong> ${movie.director}</li>
             <li><strong>출연:</strong> ${movie.actor}</li>
         </ul>

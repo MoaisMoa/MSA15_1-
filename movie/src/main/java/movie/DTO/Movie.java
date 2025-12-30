@@ -1,6 +1,7 @@
 package movie.DTO;
 
 import java.util.Date;
+import java.util.List;
 
 import com.alohaclass.jdbc.annotation.Pk;
 import com.alohaclass.jdbc.annotation.Table;
@@ -30,5 +31,7 @@ public class Movie {
     private int playTime;
     private String imgPath;
     private String detailImgPath; 
+    
+	private List<Genre> genres;
 }
 

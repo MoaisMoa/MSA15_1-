@@ -25,14 +25,14 @@ request.setAttribute("movieList", movieList);
 <script>
 const root = "${pageContext.request.contextPath}";
 const movies = [
-    <c:forEach var="movie" items="${movieList}" varStatus="s">
-        {
-            id: ${movie.movieId},           
-            title: "${fn:escapeXml(movie.title)}",
-            detailImgPath: "${movie.detailImgPath}",
-            releaseYear: "<fmt:formatDate value='${movie.releaseDate}' pattern='yyyy'/>"
-        }<c:if test="${!s.last}">,</c:if>
-    </c:forEach>
+<c:forEach var="movie" items="${movieList}" varStatus="s">
+{
+    id: ${movie.movieId},
+    title: "${fn:escapeXml(movie.title)}",
+    detailImgPath: "${movie.detailImgPath}",
+    releaseYear: "<fmt:formatDate value='${movie.releaseDate}' pattern='yyyy'/>"
+}<c:if test="${!s.last}">,</c:if>
+</c:forEach>
 ];
 </script>
 
@@ -45,138 +45,194 @@ const movies = [
 <link rel="stylesheet" href="${root}/static/css/main.css">
 </head>
 <body>
-
-<jsp:include page="/header.jsp" />
-
-<section class="tournament-container">
-	<div class="tournament-wrapper">
-		<div class="round-select">
-			<h2>자신의 최애 영화를 골라보세요!</h2>
-			<select id="roundSelect">
-				<option value="16">16강</option>
-				<option value="8">8강</option>
-				<option value="4">4강</option>
-			</select>
-			<button id="startBtn">시작하기</button>
+	
+	<jsp:include page="/header.jsp" />
+	
+	<section class="tournament-container">
+		<div class="tournament-wrapper">
+			<div class="round-select">
+				<h2>자신의 최애 영화를 골라보세요!</h2>
+				<select id="roundSelect">
+					<option value="16">16강</option>
+					<option value="8">8강</option>
+					<option value="4">4강</option>
+				</select>
+				<button id="startBtn">시작하기</button>
+			</div>
 		</div>
-	</div>
-
-	<div class="match hidden">
-		<div class="progress" id="progressText"></div>
-		<div class="vs-box">
-			<div class="movie-card" id="leftMovie"></div>
-			<div class="vs-text">VS</div>
-			<div class="movie-card" id="rightMovie"></div>
+	
+		<div class="match hidden">
+				<div class="progress" id="progressText"></div>
+				<div class="vs-box">
+					<div class="movie-card" id="leftMovie"></div>
+					<div class="vs-text">VS</div>
+					<div class="movie-card" id="rightMovie"></div>
+				</div>
 		</div>
-	</div>
-</section>
+	</section>
+	
+	<jsp:include page="/footer.jsp" />
+	
+	<script>
+	document.addEventListener('DOMContentLoaded', () => {
+	    if (!movies || movies.length === 0) return;
+	
+	    let currentRound = [];
+	    let nextRound = [];
+	    let index = 0;
+	    let matchNumber = 1;
+	
+	    const leftEl = document.getElementById('leftMovie');
+	    const rightEl = document.getElementById('rightMovie');
+	    const progressEl = document.getElementById('progressText');
+	    const startBtn = document.getElementById('startBtn');
+	    const roundSelect = document.getElementById('roundSelect');
+	    const vsText = document.querySelector('.vs-text');
+	
+	    startBtn.addEventListener('click', () => {
+	        const roundCount = Math.min(parseInt(roundSelect.value), movies.length);
+	        startTournament(roundCount);
+	    });
+	
+	    function startTournament(roundCount) {
+	        currentRound = shuffle(movies).slice(0, roundCount);
+	        nextRound = [];
+	        index = 0;
+	        matchNumber = 1;
+	        document.querySelector('.round-select').classList.add('hidden');
+	        document.querySelector('.match').classList.remove('hidden');
+	        progressEl.style.display = "flex";
+	        if (vsText) vsText.style.display = "block";
+	        showMatch();
+	    }
+	
+	    function showMatch() {
+	        // 우승 확정
+	        if (currentRound.length === 1) {
+	            showWinner(currentRound[0]);
+	            return;
+	        }
+	
+	        if (index >= currentRound.length) {
+	            currentRound = nextRound;
+	            nextRound = [];
+	            index = 0;
+	            matchNumber = 1;
+	        }
+	
+	        const m1 = currentRound[index];
+	        const m2 = currentRound[index + 1];
+	        if (!m2) return;
+	
+	        const roundSize = currentRound.length;
+	        progressEl.innerText =
+	            (roundSize === 2 ? "결승!" : roundSize + "강 / " + matchNumber + "번째 매치");
+	
+	        render(leftEl, m1);
+	        render(rightEl, m2);
+	
+	        leftEl.onclick = () => pickWinner(m1);
+	        rightEl.onclick = () => pickWinner(m2);
+	    }
+	
+	    function pickWinner(movie) {
+	        // 🔥 결승전이면 바로 우승 처리
+	        if (currentRound.length === 2) {
+	            showWinner(movie);
+	            return;
+	        }
+	        nextRound.push(movie);
+	        index += 2;
+	        matchNumber++;
+	        showMatch();
+	    }
+	
+	
+	    function showWinner(winner) {
+	        document.querySelector('.vs-box').classList.add('winner-mode');
 
-<jsp:include page="/footer.jsp" />
+	        progressEl.innerText = "1등!";
+	        if (vsText) vsText.style.display = "none";
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    if (!movies || movies.length === 0) return;
+	        // 왼쪽 : 우승 영화
+	        render(leftEl, winner);
 
-    let currentRound = [];
-    let nextRound = [];
-    let index = 0;
-    let matchNumber = 1;
-    let currentRoundName = "";
+	        // 오른쪽 초기화
+	        rightEl.innerHTML = "";
+	        rightEl.onclick = null;
 
-    const leftEl = document.getElementById('leftMovie');
-    const rightEl = document.getElementById('rightMovie');
-    const progressEl = document.getElementById('progressText');
-    const startBtn = document.getElementById('startBtn');
-    const roundSelect = document.getElementById('roundSelect');
-    const vsText = document.querySelector('.vs-text');
+	        // ================= winner-box =================
+	        const box = document.createElement("div");
+	        box.className = "winner-box";
 
-    startBtn.addEventListener('click', () => {
-        const selected = parseInt(roundSelect.value) || 16;
-        const roundCount = Math.min(selected, movies.length);
-        startTournament(roundCount);
-    });
+	        // 🏆 1등 텍스트
+	        const rankText = document.createElement("div");
+	        rankText.className = "winner-rank";
+	        rankText.innerText = "🏆 1등 🏆";
 
-    function startTournament(roundCount) {
-        currentRound = shuffle(movies).slice(0, roundCount);
-        nextRound = [];
-        index = 0;
-        matchNumber = 1;
-        currentRoundName = (currentRound.length === 2) ? "결승" : currentRound.length + "강";
+	        // 🎬 영화 제목
+	        const titleText = document.createElement("div");
+			titleText.className = "winner-title";
+			titleText.innerText = winner.title + " (" + winner.releaseYear + ")";
 
-        document.querySelector('.round-select').classList.add('hidden');
-        document.querySelector('.match').classList.remove('hidden');
 
-        progressEl.style.display = "block";
-        vsText.style.display = "block";
+	        // 버튼 영역 (가로 정렬)
+	        const btnWrap = document.createElement("div");
+	        btnWrap.className = "winner-btn-wrap";
 
-        showMatch();
-    }
+	        // 상세 페이지 버튼
+	        const detailBtn = document.createElement("button");
+	        detailBtn.innerText = "영화 소개 보러가기";
+	        detailBtn.onclick = () => {
+	            location.href = root + "/detail?id=" + winner.id;
+	        };
 
-    function showMatch() {
-        if (currentRound.length === 1) {
-            const winner = currentRound[0];
-            window.location.href = root + "/detail.jsp?id=" + winner.id;
-            return;
-        }
+	        // 리뷰 페이지 버튼
+	        const reviewBtn = document.createElement("button");
+	        reviewBtn.innerText = "리뷰 쓰기";
+	        reviewBtn.onclick = () => {
+	            location.href = root + "/review?id=" + winner.id;
+	        };
 
-        if (index >= currentRound.length) {
-            currentRound = nextRound;
-            nextRound = [];
-            index = 0;
-            matchNumber = 1;
-            currentRoundName = (currentRound.length === 2) ? "결승" : currentRound.length + "강";
-        }
+	        // 버튼 가로 정렬
+	        btnWrap.appendChild(detailBtn);
+	        btnWrap.appendChild(reviewBtn);
 
-        const m1 = currentRound[index];
-        const m2 = currentRound[index + 1];
+	        // ⭐ winner-box 안에 순서대로 추가
+	        box.appendChild(rankText);
+	        box.appendChild(titleText);
+	        box.appendChild(btnWrap);
 
-        if (!m2) {
-            pickWinner(m1);
-            return;
-        }
+	        rightEl.appendChild(box);
+	    }
 
-        progressEl.innerText = `${currentRoundName} / ${matchNumber}번째 매치`;
-
-        render(leftEl, m1);
-        render(rightEl, m2);
-
-        leftEl.onclick = () => { pickWinner(m1); };
-        rightEl.onclick = () => { pickWinner(m2); };
-    }
-
-    function pickWinner(movie) {
-        nextRound.push(movie);
-        index += 2;
-        matchNumber++;
-        showMatch();
-    }
-
-    function render(el, movie) {
-        el.innerHTML = "";
-        if(movie.detailImgPath) {
-            const img = document.createElement("img");
-            img.src = root + movie.detailImgPath;
-            img.alt = movie.title;
-            img.style.width = "450px";
-            img.style.borderRadius = "12px";
-            el.appendChild(img);
-        }
-        const title = document.createElement("p");
-        title.innerText = movie.title + " (" + movie.releaseYear + ")";
-        el.appendChild(title);
-    }
-
-    function shuffle(array) {
-        const arr = array.slice();
-        for (let i = arr.length-1; i>0; i--) {
-            const j = Math.floor(Math.random()*(i+1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-});
-</script>
-
-<script src="${root}/static/js/main.js"></script>
-</body>
-</html>
+	    function render(el, movie) {
+	        el.innerHTML = "";
+	        const img = document.createElement("img");
+	        img.src = root + movie.detailImgPath;
+	        img.alt = movie.title;
+	        img.style.width = "450px";
+	        img.style.borderRadius = "12px";
+	        el.appendChild(img);
+	
+	        const p = document.createElement("p");
+	        p.innerText = movie.title + " (" + movie.releaseYear + ")";
+	        el.appendChild(p);
+	    }
+	
+	    function shuffle(array) {
+	        const arr = array.slice();
+	        for (let i = arr.length - 1; i > 0; i--) {
+	            const j = Math.floor(Math.random() * (i + 1));
+	            [arr[i], arr[j]] = [arr[j], arr[i]];
+	        }
+	        return arr;
+	    }
+	});
+	</script>
+	
+	<!-- 🔍 검색창 등 공통 기능 -->
+<%-- 	<script src="${root}/static/js/main.js"></script> --%>
+	
+	</body>
+	</html>

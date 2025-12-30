@@ -140,3 +140,4 @@ SELECT * FROM movie_genre
 --UPDATE movie
 --SET detail_img_path = '/static/img/movie/인터스텔라세로.jpg'
 --WHERE movie_id = 1;
+
