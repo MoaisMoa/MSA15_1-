@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class Movie {
 
     @Pk
@@ -32,10 +33,6 @@ public class Movie {
     private int playTime;
     private String imgPath;
     private String detailImgPath; 
-    
-	private List<Genre> genres;
-}
-
     
     // 장르 추가
     @Column(exist = false)

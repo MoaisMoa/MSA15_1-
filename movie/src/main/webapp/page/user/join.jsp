@@ -15,7 +15,7 @@
 <jsp:include page="/layout/header.jsp"/>
 
 <main>
-	<div class="container">
+	<div class="container my-5">
 		<form action="${root}/join" method="post" class="join-card" onsubmit="return validatePassword()">
 			<!-- 아이디 -->
 			<div class="form-row">
