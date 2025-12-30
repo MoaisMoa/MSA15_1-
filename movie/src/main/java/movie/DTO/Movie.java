@@ -31,7 +31,10 @@ public class Movie {
     private Date createdAt;
     private int playTime;
     private String imgPath;
-    private String detailImgPath; // 유지
+    private String detailImgPath; 
+    
+	private List<Genre> genres;
+}
 
     
     // 장르 추가

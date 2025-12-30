@@ -166,6 +166,12 @@ public class BaseServiceImpl<D extends BaseDAOImpl<T>, T> implements BaseService
 		}
 		return pageInfo;
 	}
+
+	@Override
+	public List<String> selectGenresByMovieId(Integer movieId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 	
