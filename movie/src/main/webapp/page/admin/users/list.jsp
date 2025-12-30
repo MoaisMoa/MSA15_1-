@@ -43,15 +43,15 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="users" items="${usersList}">
+            <c:forEach var="user" items="${usersList}">
                 <tr style="cursor:pointer;"
-                            onclick="location.href='${root}/admin/users/detail?users_id=${users.users_id}'">        
-                    <td>${users.user_id}</td>
-                    <td>${users.username}</td>
-                    <td>${users.created_at}</td>    
+                            onclick="location.href='${root}/admin/users/detail?users_id=${user.no}'">        
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td><fmt:formatDate value="${user.createdAt}" pattern="yyyy-MM-dd"/></td>        
                 </tr>
             </c:forEach>
-            <c:if test="${empty userList}">
+            <c:if test="${empty usersList}">
                 <tr>
                     <td colspan="3" class="text-center">가입한 유저가 없습니다.</td>
                 </tr>

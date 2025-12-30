@@ -2,6 +2,7 @@ package movie.DTO;
 
 import java.util.Date;
 
+import com.alohaclass.jdbc.annotation.Column;
 import com.alohaclass.jdbc.annotation.Pk;
 import com.alohaclass.jdbc.annotation.Table;
 
@@ -24,11 +25,14 @@ public class Movie {
     private String director;
     private String actor;
     private String country;
-    private Date releaseDate;		// 2025/10/12
+    private Date releaseDate; // 2025/10/12
     private String description;
     private Date createdAt;
     private int playTime;
     private String imgPath;
     private String detailImgPath; // 유지
-}
 
+    // 계산된 평균 평점
+    @Column(exist = false)
+    private double averageRating;
+}
