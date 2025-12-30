@@ -8,6 +8,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="${root}/static/js/jquery-3.7.1.min.js"></script>
 <script src="${ root }/static/js/script.js"></script>
+<!-- 메인 JS -->
+<script src="${root}/static/js/main.js"></script>
 
 <%-- search input 
 function load(){

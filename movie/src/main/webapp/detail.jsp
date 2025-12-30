@@ -14,40 +14,13 @@
 <%@ include file="/layout/common.jsp" %>
 
 <%
-	String idParam = request.getParameter("id");
+	Object movie = request.getAttribute("movie");
 	
-	if (idParam == null || idParam.trim().isEmpty()) {
-	    out.println("<script>alert('영화 ID가 전달되지 않았습니다.'); location.href='index.jsp';</script>");
+	if (movie == null ) {
+	    out.println("<script>alert('검색된 영화가 없습니다.'); location.href='index.jsp';</script>");
 	    return;
 	}
 	
-	Long movieId = null;
-	try {
-	    movieId = Long.parseLong(idParam);
-	} catch (NumberFormatException e) {
-	    out.println("<script>alert('올바른 영화 ID가 아닙니다.'); location.href='index.jsp';</script>");
-	    return;
-	}
-
-//     MovieDAO movieDAO = new MovieDAO();
-//     MovieService movieService = new MovieServiceImpl(movieDAO);
-
-//     Movie movie = null;
-//     List<Movie> movieList = null;
-//     try {
-//         movie = movieService.select(movieId);
-//         movieList = movieService.list();
-//     } catch (Exception e) {
-//         e.printStackTrace();
-//     }
-
-//     if (movie == null) {
-//         response.sendRedirect(request.getContextPath() + "/index.jsp");
-//         return;
-//     }
-
-//     request.setAttribute("movie", movie);
-//     request.setAttribute("movieList", movieList);
 %>
 
 
