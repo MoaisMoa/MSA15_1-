@@ -17,17 +17,23 @@ public class BaseServiceImpl<D extends BaseDAOImpl<T>, T> implements BaseService
         this.dao = dao;
     }
 
+    
+    //전체 목록 조회
 	@Override
 	public List<T> list() {
+		//결과 변수 선언
 		List<T> list = null;
 		try {
+			//dao에 실제 db 조회 위임
 			list = dao.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//조회 결과 반환
 		return list;
 	}
 
+	//페이지와 페이지 크기를 받아서 페이징 조회
 	@Override
 	public List<T> listBy(Map<String, Object> map) {
 		List<T> list = null;

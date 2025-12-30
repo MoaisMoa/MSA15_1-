@@ -11,7 +11,7 @@ import movie.DTO.PersistenceLogins;
 
 public class PersistenceLoginsServiceImpl implements PersistenceLoginsService {
 
-	private PersistenceLoginsDAO persistenceLoginsDAO = new PersistenceLoginsDAO();
+private PersistenceLoginsDAO persistenceLoginsDAO = new PersistenceLoginsDAO();
 	
 	@Override
 	public PersistenceLogins insert(String username) {
@@ -21,7 +21,7 @@ public class PersistenceLoginsServiceImpl implements PersistenceLoginsService {
 		
 		PersistenceLogins login = PersistenceLogins.builder()
 												   .id(UUID.randomUUID().toString())
-												   .username(username)
+//												   .username(username)
 												   .token(UUID.randomUUID().toString())
 												   .expiryDate(expiryDate)
 												   .build();

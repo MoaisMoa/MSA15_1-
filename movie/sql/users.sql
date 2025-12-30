@@ -1,6 +1,5 @@
-DROP TABLE IF EXISTS users; 
 CREATE TABLE users (
-	no INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    no INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id VARCHAR(64) NOT NULL UNIQUE,
 	username VARCHAR(100) NOT NULL,
 	password VARCHAR(100) NOT NULL,
@@ -10,64 +9,4 @@ CREATE TABLE users (
 	tel   VARCHAR(100) NULL,
 	created_at TIMESTAMP NOT NULL DEFAULT now(),
 	updated_at TIMESTAMP NOT NULL DEFAULT now()
-) COMMENT = 회원;
-
-
-
--- 샘플 데이터
-INSERT INTO users
-(id, username, password, name, email, birth, tel)
-VALUES
-(UUID(), 'user', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO',  '일반사용자', 'user@example.com',  '1995-01-01', '010-1000-0001'),
-(UUID(), 'admin', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '관리자',     'admin@example.com', '1990-01-01', '010-1000-0002'),
-(UUID(), 'test', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO',  '테스트계정', 'test@example.com',  '2000-01-01', '010-1000-0003'),
-(UUID(), 'user01', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자01', 'user01@example.com', '1991-01-01', '010-2000-0001'),
-(UUID(), 'user02', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자02', 'user02@example.com', '1991-02-01', '010-2000-0002'),
-(UUID(), 'user03', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자03', 'user03@example.com', '1991-03-01', '010-2000-0003'),
-(UUID(), 'user04', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자04', 'user04@example.com', '1991-04-01', '010-2000-0004'),
-(UUID(), 'user05', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자05', 'user05@example.com', '1991-05-01', '010-2000-0005'),
-(UUID(), 'user06', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자06', 'user06@example.com', '1991-06-01', '010-2000-0006'),
-(UUID(), 'user07', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자07', 'user07@example.com', '1991-07-01', '010-2000-0007'),
-(UUID(), 'user08', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자08', 'user08@example.com', '1991-08-01', '010-2000-0008'),
-(UUID(), 'user09', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자09', 'user09@example.com', '1991-09-01', '010-2000-0009'),
-(UUID(), 'user10', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자10', 'user10@example.com', '1991-10-01', '010-2000-0010'),
-(UUID(), 'user11', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자11', 'user11@example.com', '1992-01-01', '010-2000-0011'),
-(UUID(), 'user12', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자12', 'user12@example.com', '1992-02-01', '010-2000-0012'),
-(UUID(), 'user13', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자13', 'user13@example.com', '1992-03-01', '010-2000-0013'),
-(UUID(), 'user14', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자14', 'user14@example.com', '1992-04-01', '010-2000-0014'),
-(UUID(), 'user15', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자15', 'user15@example.com', '1992-05-01', '010-2000-0015'),
-(UUID(), 'user16', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자16', 'user16@example.com', '1992-06-01', '010-2000-0016'),
-(UUID(), 'user17', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자17', 'user17@example.com', '1992-07-01', '010-2000-0017'),
-(UUID(), 'user18', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자18', 'user18@example.com', '1992-08-01', '010-2000-0018'),
-(UUID(), 'user19', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자19', 'user19@example.com', '1992-09-01', '010-2000-0019'),
-(UUID(), 'user20', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자20', 'user20@example.com', '1992-10-01', '010-2000-0020'),
-(UUID(), 'user21', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자21', 'user21@example.com', '1993-01-01', '010-2000-0021'),
-(UUID(), 'user22', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자22', 'user22@example.com', '1993-02-01', '010-2000-0022'),
-(UUID(), 'user23', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자23', 'user23@example.com', '1993-03-01', '010-2000-0023'),
-(UUID(), 'user24', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자24', 'user24@example.com', '1993-04-01', '010-2000-0024'),
-(UUID(), 'user25', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자25', 'user25@example.com', '1993-05-01', '010-2000-0025'),
-(UUID(), 'user26', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자26', 'user26@example.com', '1993-06-01', '010-2000-0026'),
-(UUID(), 'user27', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자27', 'user27@example.com', '1993-07-01', '010-2000-0027'),
-(UUID(), 'user28', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자28', 'user28@example.com', '1993-08-01', '010-2000-0028'),
-(UUID(), 'user29', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자29', 'user29@example.com', '1993-09-01', '010-2000-0029'),
-(UUID(), 'user30', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자30', 'user30@example.com', '1993-10-01', '010-2000-0030'),
-(UUID(), 'user31', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자31', 'user31@example.com', '1994-01-01', '010-2000-0031'),
-(UUID(), 'user32', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자32', 'user32@example.com', '1994-02-01', '010-2000-0032'),
-(UUID(), 'user33', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자33', 'user33@example.com', '1994-03-01', '010-2000-0033'),
-(UUID(), 'user34', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자34', 'user34@example.com', '1994-04-01', '010-2000-0034'),
-(UUID(), 'user35', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자35', 'user35@example.com', '1994-05-01', '010-2000-0035'),
-(UUID(), 'user36', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자36', 'user36@example.com', '1994-06-01', '010-2000-0036'),
-(UUID(), 'user37', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자37', 'user37@example.com', '1994-07-01', '010-2000-0037'),
-(UUID(), 'user38', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자38', 'user38@example.com', '1994-08-01', '010-2000-0038'),
-(UUID(), 'user39', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자39', 'user39@example.com', '1994-09-01', '010-2000-0039'),
-(UUID(), 'user40', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자40', 'user40@example.com', '1994-10-01', '010-2000-0040'),
-(UUID(), 'user41', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자41', 'user41@example.com', '1995-01-01', '010-2000-0041'),
-(UUID(), 'user42', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자42', 'user42@example.com', '1995-02-01', '010-2000-0042'),
-(UUID(), 'user43', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자43', 'user43@example.com', '1995-03-01', '010-2000-0043'),
-(UUID(), 'user44', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자44', 'user44@example.com', '1995-04-01', '010-2000-0044'),
-(UUID(), 'user45', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자45', 'user45@example.com', '1995-05-01', '010-2000-0045'),
-(UUID(), 'user46', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자46', 'user46@example.com', '1995-06-01', '010-2000-0046'),
-(UUID(), 'user47', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자47', 'user47@example.com', '1995-07-01', '010-2000-0047'),
-(UUID(), 'user48', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자48', 'user48@example.com', '1995-08-01', '010-2000-0048'),
-(UUID(), 'user49', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자49', 'user49@example.com', '1995-09-01', '010-2000-0049'),
-(UUID(), 'user50', '$2a$10$c3JWNu6oc0ptwXN6.BBMleqD8eMdPlL0YxYsSj1E1Yq16nk1.dzNO', '사용자50', 'user50@example.com', '1995-10-01', '010-2000-0050');
+);
