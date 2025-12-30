@@ -8,6 +8,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import java.io.IOException;
 
+//한글 안깨지게 하는 필터임!!
 
 @WebFilter("/*")
 public class EncodingFilter implements Filter {

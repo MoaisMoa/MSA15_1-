@@ -13,25 +13,12 @@
     font-weight: 800;
     color: #7B68EE;
   }
-  .home-btn {
-    background-color: #7B68EE;
-    border-color: #7B68EE;
-    color: #fff;
+  
+  .btn-home {
+ 	background-color: #7B68EE;
+ 	border: 2px solid #7B68EE;
   }
-  .btn-purple:hover {
-    background-color: #6a5acd;
-    border-color: #6a5acd;
-    color: #fff;
-  }
-
-  .btn-purple-outline {
-    border-color: #7B68EE;
-    color: #7B68EE;
-  }
-  .btn-purple-outline:hover {
-    background-color: #7B68EE;
-    color: #fff;
-  }
+  
 </style>
 </head>
 <body>
@@ -40,7 +27,7 @@
 
 <main>
     <section class="login-section">
-        <div class="container py-5">
+        <div class="container joinf-container py-5">
             <div class="row d-flex justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card login-card">
@@ -49,9 +36,9 @@
                             <h2 class="mb-4 login-title join-success-title">회원가입 실패</h2>
 
 
-                            <div class="d-flex justify-content-center gap-3" style="color: #7B68EE;">
+                            <div class="d-flex justify-content-center gap-3">
                                 <a href="${root}" class="btn home-btn">홈으로</a>
-                                <a href="${root}/page/user/join.jsp" class="btn btn-purple-outline">회원가입</a>
+                                <a href="${root}/page/user/join.jsp" class="btn btn-signup">회원가입</a>
                             </div>
 
                         </div>

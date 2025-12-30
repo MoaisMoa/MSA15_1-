@@ -17,20 +17,6 @@
 <main>
 	<div class="container">
 		<form action="${root}/join" method="post" class="join-card" onsubmit="return validatePassword()">
-		
-<!-- 			<!-- 프로필 -->
-<!-- 			<div class="avatar-wrap"> -->
-<!-- 				<div class="join-avatar"> -->
-<%-- 					<img src="${root}/static/img/userProfile.png" alt="user-profile" id="profilePreview"> --%>
-<!-- 				</div>		 -->
-<!-- 					프로필 변경 아이콘 -->
-<!-- 					<button type="button" class="add-icon-btn" onclick="openProfilePicker()"> -->
-<%-- 						<img src="${root}/static/img/AddUserProfile.png" alt="add-profile"> --%>
-<!-- 					</button> -->
-<!-- 			</div>	 -->
-			<!-- 이미지 가져오기 -->
-<!-- 			<input type="file" id="profileImage" name="profileImage" accept="image/*" style="display:none" onchange="previewProfile(this)"> -->
-
 			<!-- 아이디 -->
 			<div class="form-row">
 				<input type="text" id="username" name="username" class="join-input" placeholder="아이디 입력" required>
@@ -82,9 +68,6 @@
               <select name="tel1" class="join-input">
                 <option value="010">010</option>
                 <option value="011">011</option>
-                <option value="016">016</option>
-                <option value="017">017</option>
-                <option value="019">019</option>
               </select>
             <input type="text" name="tel2" class="join-input" required>
   			<input type="text" name="tel3" class="join-input" required>
@@ -102,9 +85,8 @@
 <script>
 	const root = "${root}"
 
-	async function clickIdCheck() {
-		
 		// 아이디 유효성 검사
+	async function clickIdCheck() {
 		let username = document.getElementById("username").value
 		let usernameCheck = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{5,20}$/
 		let msg = '아이디는 한글, 영문자, 숫자 5~20 자로 입력해주세요.'
@@ -152,6 +134,20 @@
 	  }
 	  return true;
 	}
+	
+// 	//이메일 유효성 검사
+// 	function emailCheck() {
+		
+// 	}
+	
+// 	let username = document.getElementById("username").value
+// 	let usernameCheck = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{5,20}$/
+// 	let msg = '아이디는 한글, 영문자, 숫자 5~20 자로 입력해주세요.'
+// 	if(!usernameCheck.test(username)) {
+// 		alert(msg)
+// 		return false
+// 	}
+	
 </script>
 
 

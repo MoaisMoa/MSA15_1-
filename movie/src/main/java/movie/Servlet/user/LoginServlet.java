@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 			) throws ServletException, IOException {
 		String page = "";
 		//ID저장 쿠키 확인
-		String rememberId = "";
+		String saveId = "";
 		String username = "";
 		Cookie[] cookies = request.getCookies();
 		if(cookies != null) {
@@ -39,23 +39,18 @@ public class LoginServlet extends HttpServlet {
 				if("username".equals(name)) {
 					username = value;
 				}
-//				if("rememberId".equals(name)) {
-//					remamaberId = value;
-//				}
+				if("saveId".equals(name)) {
+					saveId = value;
+				}
 			}
 		}
 		request.setAttribute("username", username);
-//		request.setAttribute("rememberId", rememberId);
-		
-//		 임시 로그인 테스트
-//		 HttpSession session = request.getSession();
-//		 session.setAttribute("username", "Moa");
-		
-//		page="/page/user/login.jsp";
-//		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-//		dispatcher.forward(request, response);
+		request.setAttribute("saveId", saveId);
+	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/page/user/login.jsp");
 		dispatcher.forward(request, response);
+		
+		
 	}
 	
 	@Override
@@ -69,31 +64,31 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		//ID 저장
-		String rememberId = request.getParameter("rememberId");
-		Cookie cookieRememberId = new Cookie("rememberId","");
+		String saveId = request.getParameter("saveId");
+		Cookie cookieSaveId = new Cookie("saveId","");
 		Cookie cookieUsername = new Cookie("username","");
-		cookieRememberId.setPath("/");
+		cookieSaveId.setPath("/");
 		cookieUsername.setPath("/");
-		System.out.println("rememberId : "+rememberId);
+		System.out.println("saveId : " + saveId);
 		
 		//아이디 저장 체크 시 on
-		if(rememberId != null && rememberId.equals("on")) {
+		if(saveId != null && saveId.equals("on")) {
 			//쿠키 생성
-			cookieRememberId.setValue(URLEncoder.encode(rememberId,"UTF-8"));
+			cookieSaveId.setValue(URLEncoder.encode(saveId,"UTF-8"));
 			cookieUsername.setValue(URLEncoder.encode(username,"UTF-8"));
 			
 			//쿠키 만료시간 설정 - 7일
-			cookieRememberId.setMaxAge(60*60*24*7);
+			cookieSaveId.setMaxAge(60*60*24*7);
 			cookieUsername.setMaxAge(60*60*24*7);
 		}
 		//아이디 저장 체크 해제 시
 		else {
 			//쿠키 삭제
-			cookieRememberId.setMaxAge(0);
+			cookieSaveId.setMaxAge(0);
 			cookieUsername.setMaxAge(0);
 		}
 		//응답에 쿠키 등록
-		response.addCookie(cookieRememberId);
+		response.addCookie(cookieSaveId);
 		response.addCookie(cookieUsername);
 	
 	Users user = Users.builder()
@@ -113,6 +108,7 @@ public class LoginServlet extends HttpServlet {
 	//회원 조회
 	Users loginUser = userService.loginAndGetUser(username,password);
 	
+	
 	//로그인 실패2
 	if(loginUser == null) {
 		request.getRequestDispatcher("/page/user/login_failed.jsp").forward(request, response);
@@ -121,9 +117,17 @@ public class LoginServlet extends HttpServlet {
 	loginUser.setPassword(null);
 	
 	//session에 사용자 정보 등록
-	HttpSession session = request.getSession();
+	HttpSession session = request.getSession(); //session 요청
+	//loginId는 세션에 저장한 로그인 사용자 식별자 이름(Key) DB랑 상관X
 	session.setAttribute("loginId",loginUser.getUsername());
 	session.setAttribute("loginUser",loginUser);
+	
+	//로그 확인..
+	System.out.println("LOGIN SUCCESS");
+	System.out.println("SESSION ID = " + session.getId());
+	System.out.println("LOGIN USER = " + loginUser.getUsername());
 	response.sendRedirect(root+"/");
 	}
+	
+	
 }

@@ -17,7 +17,6 @@
 	border-radius: 30px;
 }
 
-
 .btn-login:hover {
   background-color: #6a5acd;
 }
@@ -41,21 +40,13 @@
 	flex-direction: column;
 }
 
-.login-admin-link {
-	color: #7B68EE;
-}
-
-.login-admin-link:hover {
-	color: #5A4FCF;
-}
-
 .login-join-link {
 	color: #7B68EE;
 	font-weight: bold;
 }
 
 .login-join-link:hover {
-	color: #a3a8ff
+	color: #6a5acd;
 }
 
 .login-group {

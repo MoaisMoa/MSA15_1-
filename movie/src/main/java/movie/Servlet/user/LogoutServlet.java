@@ -21,14 +21,10 @@ public class LogoutServlet extends HttpServlet {
 		String root = request.getContextPath();
 		HttpSession session = request.getSession(false);
 		
-		Cookie rememberMeCookie = new Cookie("rememberMe","");
 		Cookie tokenCookie = new Cookie("token","");
-		rememberMeCookie.setPath("/");
 		tokenCookie.setPath("/");
-		rememberMeCookie.setMaxAge(0);
 		tokenCookie.setMaxAge(0);
 		
-		response.addCookie(rememberMeCookie);
 		response.addCookie(tokenCookie);
 		
 		if(session != null) {

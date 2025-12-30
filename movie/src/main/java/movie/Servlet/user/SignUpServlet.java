@@ -41,8 +41,6 @@ public class SignUpServlet extends HttpServlet {
         	String password = request.getParameter("password");
         	String name     = request.getParameter("name");
         	
-        	System.out.println("#### username : "+ username);
-        	
         //이메일 조립
         	String email = request.getParameter("mail1") + "@" +
         				   request.getParameter("mail2");
@@ -68,10 +66,9 @@ public class SignUpServlet extends HttpServlet {
 					  		  .tel(tel)			  //전화번호
 					  		  .build();
 	    	int result = userService.signup(user);
-	    	System.out.println("DEBUG username = " + user.getUsername());
-//	    	response.sendRedirect(root + "/page/user/join-success.jsp");
 	    	if(result > 0) {
 	    		name = URLEncoder.encode(name, "UTF-8");
+	    		//"name님 환영합니다~"
 	    		response.sendRedirect(request.getContextPath() + "/page/user/join-success.jsp?name=" + name);
 	    	} else {
 	    		response.sendRedirect(root + "/join.jsp?error=true");
@@ -85,33 +82,3 @@ public class SignUpServlet extends HttpServlet {
 		}
     }
 }
-    	
-    	
-    	
-//    	String root = request.getContextPath();
-//    	String username = request.getParameter("username");
-//    	String password = request.getParameter("password");
-//    	String name = request.getParameter("name");
-//    	String tel = request.getParameter("tel");
-//    	String email = request.getParameter("email");
-    	
-//    	Users user = Users.builder()
-//    			  .id(UUID.randomUUID().toString())
-//				  .username(username) //로그인 아이디
-//				  .password(password) //비밀번호
-//				  .name(name) 		  //실명
-//				  .tel(tel)			  //전화번호
-//				  .email(email)		  //이메일
-//				  .build();
-    	
-//    	int result = userService.signup(user);
-//    	
-//    	if(result>0) {
-//			//성공 => 로그인 페이지로 이동
-//			response.sendRedirect(root + "/join-success.jsp");
-//		} else {
-//			//실패 => 다시 회원가입 페이지로 이동
-//			response.sendRedirect(root + "/join-failed.jsp");
-//		}
-//    	
-    	
