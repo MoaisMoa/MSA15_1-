@@ -14,6 +14,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements 
 	public UserServiceImpl(UserDAO dao) {
 		super(dao);
 	}
+	
+	public UserServiceImpl() {
+	    super(new UserDAO());
+	}
+
 
 	@Override
 	public int join(Users user) {
@@ -86,4 +91,5 @@ public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements 
 		}
 		return user;
 	}
+	
 }

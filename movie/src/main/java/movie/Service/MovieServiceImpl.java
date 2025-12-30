@@ -9,4 +9,17 @@ public class MovieServiceImpl extends BaseServiceImpl<MovieDAO, Movie> implement
 		super(dao);
 	}
 
+	@Override
+	public Movie insertKey(Movie movie) {
+		Movie result = null;
+		try {
+			result = dao.insertKey(movie);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
 }
+
