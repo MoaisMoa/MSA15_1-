@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import movie.DAO.ReviewDAO;
 import movie.DTO.Review;
+import movie.DTO.Users;
 import movie.Service.ReviewService;
 import movie.Service.ReviewServiceImpl;
 
@@ -32,7 +33,8 @@ public class ReviewWriteServlet extends HttpServlet {
         Integer movieId = null;
         try {
             // 임시로 사용자 ID를 1로 고정 (로그인 구현 전)
-            int userId = 1;
+        	Users loginUser = (Users) request.getSession().getAttribute("loginUser");
+        	
             // 파라미터
             movieId = Integer.parseInt(request.getParameter("movieId"));
             String content = request.getParameter("content");
@@ -41,14 +43,14 @@ public class ReviewWriteServlet extends HttpServlet {
 
             System.out.println("##### 리뷰 등록 #####");
             System.out.println("movieId : " + movieId);
-            System.out.println("userId : " + userId);
+            System.out.println("userId : " + loginUser.getNo());
             System.out.println("rating : " + rating);
             System.out.println("content : " + content);
 
             // 기존 리뷰 존재 여부 확인
             Map<String, Object> checkMap = new HashMap<>();
             checkMap.put("movie_id", movieId);
-            checkMap.put("user_id", userId);
+            checkMap.put("user_id", loginUser.getNo());
             Review existingReview = reviewService.selectBy(checkMap);
 
             if (existingReview != null) {
@@ -67,7 +69,7 @@ public class ReviewWriteServlet extends HttpServlet {
             // 리뷰 객체 생성
             Review review = Review.builder()
                     .movieId(movieId)
-                    .userId(userId)
+                    .userId(loginUser.getNo())
                     .rating(rating)
                     .content(content)
                     .build();
