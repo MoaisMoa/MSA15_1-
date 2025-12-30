@@ -4,7 +4,7 @@
 	String root = request.getContextPath();
 	pageContext.setAttribute("root", root);
 	// 로그인 아이디 (세션)
-	String loginId = (String) session.getAttribute("loginId");	
-	pageContext.setAttribute("loginId", loginId);
+	String username = (String) session.getAttribute("username");	
+	pageContext.setAttribute("username", username);
 	// ...
 %>

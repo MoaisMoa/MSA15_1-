@@ -6,117 +6,226 @@
 
 body {
   font-family: Arial, sans-serif;
+  margin-bottom: 80px;
 }
 
-/* ================= 헤더 ================= */
+/* ================= 토너먼트 ================= */
+.hidden {
+  display: none;
+}
 
-.header {
-  margin-top: 10px;
+.tournament-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 40px;
-  border-bottom: 1px solid #ddd;
-  white-space: nowrap;
-  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 80px;
 }
 
-.header > * {
-	flex-shrink: 0;
+/* 라운드 선택 박스 */
+.round-select {
+  width: 720px;
+  padding: 50px 40px;
+  border: 2px solid #222;
+  border-radius: 18px;
+  text-align: center;
+  background-color: #fff;
 }
 
-
-.right-menu {
-  display: flex;
-  gap: 15px;
+.round-select h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 18px;
 }
 
-/* ================= 검색창 ================= */
-.search-wrapper {
-  position: relative;
-  display: inline-block;
+.round-select h2::after {
+  content: "총 라운드를 선택하세요.";
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: #555;
+  margin-top: 12px;
 }
 
-.search-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.search {
-  width: 600px;
-  height: 40px;
-  padding: 6px 12px 6px 36px; /* 왼쪽 공간 확보 */
+#roundSelect {
+  width: 100%;
+  margin-top: 30px;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 8px;
   border: 2px solid black;
-  border-radius: 5px;
-  outline: none;
+  cursor: pointer;
 }
 
-/* 얇은 검정 돋보기 원 */
-.search-wrapper::before {
-  content: "";
-  position: absolute;
-  left: 10px;
-  top: 45%;
-  transform: translateY(-50%);
-  width: 14px;
-  height: 14px;
-  border: 1px solid #000;  /* 얇게 */
-  border-radius: 50%;
-  box-sizing: border-box;
-}
-
-/* 손잡이: 원 밖으로만 연결 */
-.search-wrapper::after {
-  content: "";
-  position: absolute;
-  left: 22px;   /* 원 바깥쪽에서 시작 */
-  top: 60%;
-  transform: translateY(-50%) rotate(45deg);
-  width: 10px;
-  height: 0.9px;  /* 얇게 */
-  background: #000;  /* 검정색 */
-  transform-origin: left center;
-}
-
-
-.menu-btn {
-  text-decoration: none;
-  color: #111;
+#startBtn {
+  width: 250px;
+  margin-top: 22px;
+  padding: 15px;
+  font-size: 18px;
   font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 10px;
-  transition: all 0.2s ease;
-  display: inline-block;
-  margin-top: -10px;
-  white-space: nowrap;
-}
-
-.menu-btn:hover {
-  background: #111;
+  background-color: #6c63ff;
   color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
+#startBtn:hover {
+  background-color: #574fd1;
+}
 
-.title-link {
-  font-size: 40px;
-  text-decoration: none;
-  color: #000;
-  display: inline-block;
-  margin-top: -10px;
+/* ================= 매치 영역 ================= */
+
+.match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: 50px;
+}
+
+/* 진행 라운드 텍스트 */
+#progressText {
+  position: absolute;
+  top: -130px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 100%;
+  min-width: 100%;
+  height: 70px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+  padding: 14px 0;
+  z-index: 20;
   white-space: nowrap;
+  text-align: center;
+  border: 2px solid black;
 }
 
-.title-link:hover {
-  opacity: 0.8;
+/* VS 텍스트 */
+.vs-text {
+  font-size: 170px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: -8px -8px 0 #000, 8px -8px 0 #000,
+               -8px 8px 0 #000, 8px 8px 0 #000;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  display: none;
 }
 
-footer {
-    bottom: 0;            /* 맨 아래 */
-    left: 0;              /* 좌측 끝 */
-    width: 100%;          /* 전체 너비 */
-    text-align: center;
-    padding: 20px 0;
-    font-size: 14px;
-    color: #666;
-    z-index: 1000;        /* 다른 요소 위로 올라오게 */
+/* VS 박스 */
+.vs-box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 350px;
+  position: relative;
+}
+
+/* 영화 카드 */
+.movie-card {
+  cursor: pointer;
+  text-align: center;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -50px;
+}
+
+.movie-card img {
+  width: 700px;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+  margin-bottom: 10px;
+  transition: transform 0.3s;
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.movie-card:hover img {
+  transform: scale(1.05);
+}
+
+.movie-card p {
+  font-size: 25px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+/* ================= 우승 버튼 박스 ================= */
+
+.winner-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;   /* ⭐ 상 / 중 / 하 분리 */
+  align-items: center;
+  cursor: default;
+
+  width: 640px;
+  height: 640px;
+  padding: 40px 30px;              /* ⭐ 내부 여백 */
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+/* 1등 텍스트 (상단) */
+.winner-rank {
+  font-size: 40px;
+  font-weight: 550;
+  color: #6c63ff;
+}
+
+/* 영화 타이틀 (가운데) */
+.winner-title {
+  font-size: 40px;
+  font-weight: 450;
+  text-align: center;
+}
+
+/* 버튼 영역 (하단) */
+.winner-btn-wrap {
+  display: flex;
+  gap: 30px;
+}
+
+.winner-btn-wrap button {
+  min-width: 220px;
+  padding: 18px 36px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+
+  border-radius: 10px;
+  border: none;
+  background-color: #6c63ff;
+  color: #fff;
+
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.winner-btn-wrap button:hover {
+  background-color: #574fd1;
+  transform: translateY(-3px);
+}
+
+/* 우승 상태 레이아웃 */
+.vs-box.winner-mode {
+  gap: 200px;
+}
+
+/* 우승 시 이미지 hover 제거 */
+.vs-box.winner-mode .movie-card:hover img {
+  transform: none;
 }

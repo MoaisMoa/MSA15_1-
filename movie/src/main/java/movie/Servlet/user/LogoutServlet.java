@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import movie.Service.PersistenceLoginsService;
+import movie.Service.PersistenceLoginsServiceImpl;
 
 import java.io.IOException;
 
@@ -14,27 +16,30 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response
-			) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// url : /users/idCheck
 		String root = request.getContextPath();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		
-		//모든 쿠키 제거
-		Cookie usernameCookie = new Cookie("username","");
 		Cookie tokenCookie = new Cookie("token","");
-		Cookie[] deleteCookies = {usernameCookie,tokenCookie};
-		for(int i=0; i<deleteCookies.length; i++) {
-			Cookie cookie = deleteCookies[i];
-			cookie.setPath("/");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
+		tokenCookie.setPath("/");
+		tokenCookie.setMaxAge(0);
+		
+		response.addCookie(tokenCookie);
+		
+		if(session != null) {
+			String username = (String) session.getAttribute("username");
+			if(username != null) {
+				PersistenceLoginsService persistenceLoginsService = new PersistenceLoginsServiceImpl();
+				persistenceLoginsService.delete(username);
+			}
+			session.invalidate();
 		}
-		session.invalidate();
-		response.sendRedirect(root+"/"); //로그아웃 후 메인화면으로 이동
+		response.sendRedirect(root + "/");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response
-			) throws ServletException, IOException {
-		
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 }
