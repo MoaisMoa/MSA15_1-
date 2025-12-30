@@ -162,28 +162,29 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  /* ===================== 영화 검색 기능 ===================== */
-
+  // ===================== 영화 검색 기능 =====================
   const searchInput = document.getElementById('movieSearchInput');
   const searchBtn = document.getElementById('movieSearchBtn');
 
-  // JSP에서 movies 배열로 전달되어야 함
   if (searchInput && searchBtn && typeof movies !== 'undefined') {
-    searchBtn.addEventListener('click', () => {
-      const query = searchInput.value.trim().toLowerCase();
-      if (!query) return;
+      searchBtn.addEventListener('click', () => {
+          const query = searchInput.value.trim().toLowerCase();
+          if (!query) return;
 
-      const movie = movies.find(m => m.title.toLowerCase().includes(query));
-      if (movie) {
-        window.location.href = `${contextPath}/detail.jsp?id=${movie.id}`;
-      } else {
-        alert('검색된 영화가 없습니다.');
-      }
-    });
+          const movie = movies.find(m => m.title.toLowerCase().includes(query));
+          if (movie) {
+              window.location.href = `${contextPath}/detail.jsp?id=${movie.id}`;
+          } else {
+              alert('검색된 영화가 없습니다.');
+          }
+      });
 
-    searchInput.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') searchBtn.click();
-    });
+      // Enter 키 입력 시 검색
+      searchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') searchBtn.click();
+      });
   }
+
+
 
 });

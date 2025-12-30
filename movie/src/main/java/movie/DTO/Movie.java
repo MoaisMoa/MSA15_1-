@@ -34,6 +34,8 @@ public class Movie {
     private String imgPath;
     private String detailImgPath; 
     
+
+    
     // 장르 추가
     @Column(exist = false)
     private List<String> genres;
