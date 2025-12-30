@@ -16,7 +16,7 @@
 
 <main>
 	<div class="container">
-		<form action="${root}/join" method="post" enctype="multipart/form-data" class="join-card" onsubmit="return validatePassword()">
+		<form action="${root}/join" method="post" class="join-card" onsubmit="return validatePassword()">
 		
 <!-- 			<!-- 프로필 -->
 <!-- 			<div class="avatar-wrap"> -->
@@ -67,13 +67,13 @@
            <!-- 생년월일 -->
           <div class="row mb-3">
             <div class="col">
-              <input name="birthhyy" class="form-control" placeholder="년" required>
+              <input name="birthyy" class="form-control" placeholder="년" required>
             </div>
             <div class="col">
-              <input name="birthhmm" class="form-control" placeholder="월" required>
+              <input name="birthmm" class="form-control" placeholder="월" required>
             </div>
             <div class="col">
-              <input name="birthhdd" class="form-control" placeholder="일" required>
+              <input name="birthdd" class="form-control" placeholder="일" required>
             </div>
           </div>
         

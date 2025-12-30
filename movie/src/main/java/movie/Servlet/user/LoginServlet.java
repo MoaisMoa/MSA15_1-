@@ -34,23 +34,27 @@ public class LoginServlet extends HttpServlet {
 		Cookie[] cookies = request.getCookies();
 		if(cookies != null) {
 			for(Cookie cookie : cookies) {
-				String cookieName = cookie.getName();
-				String cookieValue = URLDecoder.decode(cookie.getValue(),"UTF-8");
-				switch(cookieName) {
-				case "username" : username = cookieValue; break;
-				case "rememberId" : rememberId = cookieValue; break;
+				String name = cookie.getName();
+				String value = URLDecoder.decode(cookie.getValue(),"UTF-8");
+				if("username".equals(name)) {
+					username = value;
 				}
+//				if("rememberId".equals(name)) {
+//					remamaberId = value;
+//				}
 			}
 		}
 		request.setAttribute("username", username);
-		request.setAttribute("rememberId", rememberId);
+//		request.setAttribute("rememberId", rememberId);
 		
 //		 임시 로그인 테스트
 //		 HttpSession session = request.getSession();
 //		 session.setAttribute("username", "Moa");
 		
-		page="/page/user/login.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+//		page="/page/user/login.jsp";
+//		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+//		dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/page/user/login.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -96,8 +100,9 @@ public class LoginServlet extends HttpServlet {
 					  .username(username)
 					  .password(password)
 					  .build();
-	boolean result = userService.insert(user);
-	
+	boolean result = userService.login(user);
+		
+		
 	//로그인 실패
 	if(!result) {
 		response.sendRedirect(root+"/login_failed.jsp?error=true");
@@ -106,12 +111,18 @@ public class LoginServlet extends HttpServlet {
 	
 	//로그인 성공
 	//회원 조회
-	Users loginUser = userService.selectById(username);
+	Users loginUser = userService.loginAndGetUser(username,password);
+	
+	//로그인 실패2
+	if(loginUser == null) {
+		request.getRequestDispatcher("/page/user/login_failed.jsp").forward(request, response);
+	}
+	//비밀번호 노출 방지 때문에 null 한거임!
 	loginUser.setPassword(null);
 	
 	//session에 사용자 정보 등록
 	HttpSession session = request.getSession();
-	session.setAttribute("loginId",user.getUsername());
+	session.setAttribute("loginId",loginUser.getUsername());
 	session.setAttribute("loginUser",loginUser);
 	response.sendRedirect(root+"/");
 	}

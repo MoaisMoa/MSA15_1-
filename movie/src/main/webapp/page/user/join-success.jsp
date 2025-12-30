@@ -47,7 +47,7 @@
 
                             <h2 class="mb-4 login-title join-success-title">회원가입 완료</h2>
 
-                            <p class="fs-5 mb-4"><strong>${username}</strong> 님, 환영합니다</p>
+                            <p class="fs-5 mb-4"><strong>${param.name}</strong> 님, 환영합니다</p>
 
                             <div class="d-flex justify-content-center gap-3" style="color: #7B68EE;">
                                 <a href="${root}" class="btn btn-purple btn-login">홈으로</a>

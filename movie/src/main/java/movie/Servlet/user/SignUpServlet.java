@@ -1,5 +1,9 @@
 package movie.Servlet.user;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.UUID;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,9 +14,6 @@ import movie.DAO.UserDAO;
 import movie.DTO.Users;
 import movie.Service.UserService;
 import movie.Service.UserServiceImpl;
-
-import java.io.IOException;
-import java.util.UUID;
 
 @WebServlet({"/join"})
 public class SignUpServlet extends HttpServlet {
@@ -52,9 +53,9 @@ public class SignUpServlet extends HttpServlet {
 				   		   request.getParameter("tel3");
 			
 		//생년월일 조립
-			String birth = request.getParameter("birthhhyy") + "-" +
-						   request.getParameter("birthhhmm") + "-" +
-						   request.getParameter("birthhhdd");
+			String birth = request.getParameter("birthyy") + "-" +
+						   request.getParameter("birthmm") + "-" +
+						   request.getParameter("birthdd");
 			
 		//user 객체 생성
 	    	Users user = Users.builder()
@@ -70,19 +71,17 @@ public class SignUpServlet extends HttpServlet {
 	    	System.out.println("DEBUG username = " + user.getUsername());
 //	    	response.sendRedirect(root + "/page/user/join-success.jsp");
 	    	if(result > 0) {
-	    		response.sendRedirect(request.getContextPath() + "/page/user/join-success.jsp");
+	    		name = URLEncoder.encode(name, "UTF-8");
+	    		response.sendRedirect(request.getContextPath() + "/page/user/join-success.jsp?name=" + name);
 	    	} else {
 	    		response.sendRedirect(root + "/join.jsp?error=true");
 	    	}
 	    	
-		} catch (IllegalArgumentException e) {
-			request.setAttribute("error",e.getMessage());
-			request.getRequestDispatcher("/page/user/join-failed.jsp").forward(request, response);
 		} catch (Exception e) {
 			//이 친구는 모든 오류 다 받아
 			//실패 => 다시 회원가입 페이지로 이동
-			response.sendRedirect(request.getContextPath() +  "/page/user/join-failed.jsp");
 			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() +  "/page/user/join-failed.jsp");
 		}
     }
 }

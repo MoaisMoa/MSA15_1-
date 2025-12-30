@@ -11,5 +11,6 @@
 </head>
 <body>
 	<p>로그인 실패</p>
+	<c:if test="${error}">로긍ㄴ 실패!</c:if>
 </body>
 </html>

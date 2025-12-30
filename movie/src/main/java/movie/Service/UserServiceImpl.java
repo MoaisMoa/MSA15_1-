@@ -59,23 +59,29 @@ public UserServiceImpl(UserDAO dao) {
 		String username = user.getUsername();
 		String password = user.getPassword();
 		
+		if(user == null || user.getUsername() == null || user.getPassword() == null) {
+			return false;
+		}
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("username", username);
 		
-		Users joinedUser = null;
+		Users joinedUser;
 		try {
 			joinedUser = dao.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 		//아이디가 존재하지 않을 경우에
 		if(joinedUser == null) {
 			return false;
 		}
 		//비밀번호 일치 여부 확인
-		String joinedPassword = joinedUser.getPassword();
-		boolean result = BCrypt.checkpw(password, joinedPassword);
-		return result;
+//		String joinedPassword = joinedUser.getPassword();
+//		boolean result = BCrypt.checkpw(password, joinedPassword);
+//		return result;
+		return BCrypt.checkpw(user.getPassword(), joinedUser.getPassword());
 	}
 
 	@Override
@@ -89,5 +95,27 @@ public UserServiceImpl(UserDAO dao) {
 			e.printStackTrace();
 		}
 		return user;
+	}
+	
+	public Users loginAndGetUser(String username, String password) {
+
+	    if (username == null || password == null) return null;
+
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("username", username);
+
+	    Users user;
+	    try {
+	        user = dao.selectBy(map);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+
+	    if (user == null) return null;
+	    if (!BCrypt.checkpw(password, user.getPassword())) return null;
+
+	    user.setPassword(null);
+	    return user;
 	}
 }

@@ -8,4 +8,5 @@ public interface UserService extends BaseService<Users>{
 	public boolean idCheck(String username);
 	public boolean login(Users user);
 	public Users selectByUsername(String username);
+	public Users loginAndGetUser(String username, String password);
 }

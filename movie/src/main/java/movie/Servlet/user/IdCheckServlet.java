@@ -25,14 +25,6 @@ public class IdCheckServlet extends HttpServlet {
         boolean exists = userService.idCheck(username);
 
        response.setContentType("text/plain; charset=UTF-8");
-
-       if (exists) {
-    	   if (exists) {
-	            response.getWriter().write("true");
-	        } else {
-	            response.getWriter().write("false");
-	        }
-       }
-       
+       response.getWriter().write(String.valueOf(exists));
     }
 }
