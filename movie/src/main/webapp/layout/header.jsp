@@ -29,7 +29,7 @@
     <%
     	} else {
     %>
-	    <a href="${root}/mypage" class="menu-btn">마이페이지</a>
+	    <a href="${root}/mypage/mypage" class="menu-btn">마이페이지</a>
     	<a class="menu-btn" aria-current="page" href="${root}/logout">로그아웃</a>
     <%
     	}

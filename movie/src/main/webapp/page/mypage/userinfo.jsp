@@ -45,7 +45,6 @@
 	
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-10 col-lg-10">
-				<form id="movieForm" method="post" action="${root}/admin/movie/update">
                     <input type="hidden" name="user_id" value="${user.no}" />					
 					
 					<div class="mb-3">
@@ -76,12 +75,9 @@
 						<button type="submit" class="btn btn-lg btn-primary">저장</button>
 						<a href="javascript: history.back()" class="btn btn-lg btn-secondary">취소</a>
 					</div>	
-				</form>
-				
+			
 			</div>
 		</div>
-
-	
 
 </div>
 

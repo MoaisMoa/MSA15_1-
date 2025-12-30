@@ -19,12 +19,15 @@ import movie.Service.ReviewServiceImpl;
 import movie.Service.UserService;
 import movie.Service.UserServiceImpl;
 
-@WebServlet("/mypage/info")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/mypage/reviewlist")
+public class MyPageReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private UserDAO userDAO = new UserDAO();
 	private UserService userService = new UserServiceImpl(userDAO);
+	
+	private ReviewDAO reivewDAO = new ReviewDAO();
+	private ReviewService reviewService = new ReviewServiceImpl(reivewDAO);
 	
     protected void doGet(
 			HttpServletRequest request, 
@@ -39,7 +42,7 @@ public class MyPageServlet extends HttpServlet {
     	
 		String path = request.getPathInfo();
 		String page = "";
-		System.out.println("/mypage/mypage");
+		System.out.println("/mypage/reviewlist");
 
 		if(path==null || path.equals("")) {
 
@@ -48,9 +51,12 @@ public class MyPageServlet extends HttpServlet {
 			 System.out.println(userId);
 			 
 			 List<Users> usersList = userService.list();
-				request.setAttribute("usersList", usersList);	            
+				request.setAttribute("usersList", usersList);	
+				
+				List<Review> reviewList = reviewService.list();
+				request.setAttribute("reviewList", reviewList);
 			 
-			page = "/page/mypage/mypage.jsp";
+			page = "/page/mypage/reviewlist.jsp";
 			
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
