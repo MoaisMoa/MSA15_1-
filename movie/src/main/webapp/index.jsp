@@ -87,7 +87,7 @@
   <button class="arrow right">〉</button>
 </section>
 
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/layout/footer.jsp" />
 
 <!-- JSP에서 JS로 영화 데이터 전달 -->
 <script>

@@ -33,8 +33,6 @@ public class Movie {
     private String imgPath;
     private String detailImgPath; 
     
-	private List<Genre> genres;
-}
 
     
     // 장르 추가

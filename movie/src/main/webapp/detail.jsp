@@ -29,25 +29,25 @@
 	    return;
 	}
 
-    MovieDAO movieDAO = new MovieDAO();
-    MovieService movieService = new MovieServiceImpl(movieDAO);
+//     MovieDAO movieDAO = new MovieDAO();
+//     MovieService movieService = new MovieServiceImpl(movieDAO);
 
-    Movie movie = null;
-    List<Movie> movieList = null;
-    try {
-        movie = movieService.select(movieId);
-        movieList = movieService.list();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+//     Movie movie = null;
+//     List<Movie> movieList = null;
+//     try {
+//         movie = movieService.select(movieId);
+//         movieList = movieService.list();
+//     } catch (Exception e) {
+//         e.printStackTrace();
+//     }
 
-    if (movie == null) {
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
-        return;
-    }
+//     if (movie == null) {
+//         response.sendRedirect(request.getContextPath() + "/index.jsp");
+//         return;
+//     }
 
-    request.setAttribute("movie", movie);
-    request.setAttribute("movieList", movieList);
+//     request.setAttribute("movie", movie);
+//     request.setAttribute("movieList", movieList);
 %>
 
 
@@ -96,7 +96,7 @@
             <li><strong>시간:</strong> ${movie.playTime}분</li>
             <li><strong>장르:</strong>
 			    <c:forEach var="g" items="${movie.genres}" varStatus="status">
-			        ${g.genre}<c:if test="${!status.last}">, </c:if>
+			        ${g}<c:if test="${!status.last}">, </c:if>
 			    </c:forEach>
 			</li>
             <li><strong>감독:</strong> ${movie.director}</li>
@@ -107,11 +107,13 @@
             <p>${movie.description}</p>
         </div>
 
-        <a href="리뷰페이지.jsp" class="review-btn">리뷰남기기</a>
+        <a href="${pageContext.request.contextPath}/review?id=${movie.movieId}" class="review-btn">
+    리뷰남기기
+</a>
     </div>
 </div>
 
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/layout/footer.jsp" />
 
 <!-- header.jsp에 이미 들어있는 검색 JS가 movies 배열을 사용 -->
 <script src="${root}/static/js/main.js"></script>

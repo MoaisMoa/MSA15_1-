@@ -71,7 +71,7 @@ const movies = [
 		</div>
 	</section>
 	
-	<jsp:include page="/footer.jsp" />
+	<jsp:include page="/layout/footer.jsp" />
 	
 	<script>
 	document.addEventListener('DOMContentLoaded', () => {
@@ -232,7 +232,7 @@ const movies = [
 	</script>
 	
 	<!-- 🔍 검색창 등 공통 기능 -->
-<%-- 	<script src="${root}/static/js/main.js"></script> --%>
+   <script src="${root}/static/js/main.js"></script>
 	
 	</body>
 	</html>
