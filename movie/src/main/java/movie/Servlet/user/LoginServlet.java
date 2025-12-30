@@ -95,23 +95,21 @@ public class LoginServlet extends HttpServlet {
 					  .username(username)
 					  .password(password)
 					  .build();
-	boolean result = userService.login(user);
 		
-		
-	//로그인 실패
-	if(!result) {
-		response.sendRedirect(root+"/login_failed.jsp?error=true");
-		return;
-	}
-	
 	//로그인 성공
 	//회원 조회
 	Users loginUser = userService.loginAndGetUser(username,password);
-	
+		
+//	//로그인 실패
+//	if(loginUser == null) {
+//		response.sendRedirect(root+"/login_failed.jsp?error=true");
+//		return;
+//	}
 	
 	//로그인 실패2
 	if(loginUser == null) {
 		request.getRequestDispatcher("/page/user/login_failed.jsp").forward(request, response);
+		return;
 	}
 	//비밀번호 노출 방지 때문에 null 한거임!
 	loginUser.setPassword(null);
@@ -119,7 +117,7 @@ public class LoginServlet extends HttpServlet {
 	//session에 사용자 정보 등록
 	HttpSession session = request.getSession(); //session 요청
 	//loginId는 세션에 저장한 로그인 사용자 식별자 이름(Key) DB랑 상관X
-	session.setAttribute("loginId",loginUser.getUsername());
+	session.setAttribute("username",loginUser.getUsername());
 	session.setAttribute("loginUser",loginUser);
 	
 	//로그 확인..

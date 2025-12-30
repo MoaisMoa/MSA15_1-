@@ -46,7 +46,7 @@ const movies = [
 </head>
 <body>
 	
-	<jsp:include page="/header.jsp" />
+	<jsp:include page="/layout/header.jsp" />
 	
 	<section class="tournament-container">
 		<div class="tournament-wrapper">

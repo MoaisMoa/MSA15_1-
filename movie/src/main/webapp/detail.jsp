@@ -72,7 +72,7 @@
 
 <body>
 
-<jsp:include page="/header.jsp" />
+<jsp:include page="/layout/header.jsp" />
 
 <script>
     const contextPath = "${pageContext.request.contextPath}";
