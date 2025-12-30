@@ -10,7 +10,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import movie.DAO.MovieDAO;
+import movie.DAO.MovieGenreDAO;
 import movie.DTO.Movie;
+import movie.DTO.MovieGenre;
 import movie.Service.MovieService;
 import movie.Service.MovieServiceImpl;
 
@@ -19,6 +21,7 @@ public class MovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private MovieDAO movieDAO = new MovieDAO();
+	private MovieGenreDAO movieGenreDAO = new MovieGenreDAO();
 	private MovieService movieService = new MovieServiceImpl(movieDAO);
 	/**
 	 * [get]
@@ -31,13 +34,13 @@ public class MovieServlet extends HttpServlet {
 		String page = "null";
 		System.out.println(path);
 		System.out.println("/admin/movie");
-		// 영화 목록
+		
 		if( path!= null && (path.equals("/list") || path.equals("/list/"))) {
 			List<Movie> movieList = movieService.list();
 			request.setAttribute("movieList", movieList);
 			page = "/page/admin/movie/list.jsp";
 		}
-		// 영화 등록
+		
 		if( path != null && path.equals("/create") ) {
 			
 			page = "/page/admin/movie/create.jsp";
@@ -73,6 +76,9 @@ public class MovieServlet extends HttpServlet {
 	        String releaseDateStr = request.getParameter("release_date");
 	        String playTimeStr = request.getParameter("play_time");
 	        
+	        
+	        String[] genres = request.getParameterValues("genre");
+	        
 	        int playTime = 0;
 	        if(playTimeStr != null && !playTimeStr.isEmpty()) {
 	            playTime = Integer.parseInt(playTimeStr);
@@ -98,7 +104,24 @@ public class MovieServlet extends HttpServlet {
 
 
 	        try {
-	            movieService.insert(movie);
+//	        	movieService.insert(movie);
+	            movie = movieService.insertKey(movie);
+	            
+	            int movieId = movie.getMovieId();		// AUTO_INCREMENT 된 movie_id 가져옴
+	            System.out.println("movieId=" + movieId);
+	            
+	            if(genres != null) {
+	            	for (String g : genres) {
+	            		MovieGenre moviegenre = MovieGenre.builder()
+	            				.movieId(movieId)
+	            				.genre(g)
+	            				.build();
+	            		
+	            		movieGenreDAO.insert(moviegenre);
+	            	}
+	            }
+	            
+	            
 	        } catch(Exception e) {
 	            e.printStackTrace();
 	        }

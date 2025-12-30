@@ -4,4 +4,6 @@ import movie.DTO.Movie;
 
 public interface MovieService extends BaseService<Movie> {
 
+	Movie insertKey(Movie movie);
+
 }

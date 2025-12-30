@@ -22,14 +22,14 @@
     				font-size:34px;
     				margin-top:60px;
     				margin-left:40px;
-    				">${title} </h2>
+    				">${review.title} </h2>
     		</div>
     		<hr style="border: 0;
     			border-top: 2px solid black;
     			margin: 0 40px 30px 40px;					
     		">
     		<div style="margin-top 20px;">
-    			${content}
+    			${review.content}
     		</div>
     		
     		<div class = "d-flex justify-content-end gap-2"

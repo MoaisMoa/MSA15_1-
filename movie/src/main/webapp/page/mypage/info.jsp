@@ -45,39 +45,35 @@
 	
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-10 col-lg-10">
-				<form action="${ root }/join" name="joinForm" method="post">
-				
-					<div class="mb-4">
-						<label class="form-label">아이디</label>
-						<p class="form-control-plaintext">
-						    ${user.username}
-						</p>			   				
-					</div>
-					
+				<form id="movieForm" method="post" action="${root}/admin/movie/update">
+                    <input type="hidden" name="user_id" value="${user.no}" />					
 					
 					<div class="mb-3">
-			          <label>아이디</label>
+			          <label style="font-size:20px;">아이디</label>
 			          <p class="form-control-plaintext">${user.username}</p>
 			      	</div>
+			      	
 				      <div class="mb-3">
-				          <label>이름</label>
+				          <label style="font-size:20px;">이름</label>
 				          <input type="text" name="name" class="form-control" value="${user.name}" required />
 				      </div>
+				      
 				      <div class="mb-3">
-				          <label>이메일</label>
+				          <label style="font-size:20px;">이메일</label>
 				          <input type="email" name="email" class="form-control" value="${user.email}" />
 				      </div>
+				      
 				      <div class="mb-3">
-				          <label>생년월일</label>
+				          <label style="font-size:20px;">생년월일</label>
 				          <input type="date" name="birth" class="form-control" value="${user.birth}" />
 				      </div>
 				      <div class="mb-3">
-				          <label>전화번호</label>
+				          <label style="font-size:20px;">전화번호</label>
 				          <input type="text" name="tel" class="form-control" value="${user.tel}" />
 				      </div>
 					
-					<div class = "d-flex justify-content-end gap-2">
-						<button type="submit" class="btn btn-primary">저장</button>
+					<div class = "d-flex justify-content-end gap-2 mt-3">
+						<button type="submit" class="btn btn-lg btn-primary">저장</button>
 						<a href="javascript: history.back()" class="btn btn-lg btn-secondary">취소</a>
 					</div>	
 				</form>

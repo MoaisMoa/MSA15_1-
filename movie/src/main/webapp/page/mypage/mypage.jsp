@@ -95,10 +95,10 @@
 					
 					">
 		    <button class="r_btn" 
-		    onclick="location.href='mypage_r.jsp'">내 리뷰 보기</button>
+		    onclick="location.href='${root}/mypage/list?users_id=${user.no}'">내 리뷰 보기</button>
 		    
 		    <button class="p_btn" 
-		    onclick="location.href='mypage/info'">내 정보 보기</button>      
+		    onclick="location.href='${root}/mypage/info?users_id=${user.no}'">내 정보 보기</button>      
 		</div>
 	</div>
 	

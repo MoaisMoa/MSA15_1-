@@ -15,39 +15,51 @@ import java.io.IOException;
 
 @WebServlet("/mypage/info")
 public class MyPageServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-      
-	private UserDAO userDAO = new UserDAO();
-	private UserService userService = new UserServiceImpl(userDAO);
-	
-	
-	protected void doGet(
-			HttpServletRequest request, 
-			HttpServletResponse response
-			)throws ServletException, IOException {
-		String path = request.getPathInfo();
-		String page = "";
-		System.out.println(path);
-		System.out.println("/mypage/info");
-		
-		HttpSession session = request.getSession(false);
+    private static final long serialVersionUID = 1L;
 
-		if (session == null || session.getAttribute("loginUser") == null) {
-			response.sendRedirect(request.getContextPath() + "/login");
-			return;
-		}
+    private UserService userService = new UserServiceImpl(new UserDAO());
 
-		String username = (String) session.getAttribute("loginUser");
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("loginUser") == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
 
-		Users user = userService.selectByUsername(username);
+        Users user = (Users) session.getAttribute("loginUser");
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("/mypage/info.jsp").forward(request, response);
+    }
 
-		request.setAttribute("user", user);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("loginUser") == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
 
-		request.getRequestDispatcher("/mypage/info.jsp")
-			   .forward(request, response);
-		
+        Users loginUser = (Users) session.getAttribute("loginUser");
 
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String birth = request.getParameter("birth");
+        String tel = request.getParameter("tel");
 
-	}
+        loginUser.setName(name);
+        loginUser.setEmail(email);
+        loginUser.setBirth(birth);
+        loginUser.setTel(tel);
 
+        // DB 업데이트
+        userService.update(loginUser);
+
+        // 세션 갱신
+        session.setAttribute("loginUser", loginUser);
+
+        response.sendRedirect(request.getContextPath() + "/mypage/info");
+    }
 }
