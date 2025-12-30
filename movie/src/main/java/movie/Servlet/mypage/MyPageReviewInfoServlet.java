@@ -10,21 +10,30 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import movie.DAO.MovieDAO;
 import movie.DAO.ReviewDAO;
 import movie.DAO.UserDAO;
+import movie.DTO.Movie;
 import movie.DTO.Review;
 import movie.DTO.Users;
+import movie.Service.MovieService;
+import movie.Service.MovieServiceImpl;
 import movie.Service.ReviewService;
 import movie.Service.ReviewServiceImpl;
 import movie.Service.UserService;
 import movie.Service.UserServiceImpl;
 
-@WebServlet("/mypage/info")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/mypage/reviewinfo")
+public class MyPageReviewInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private UserDAO userDAO = new UserDAO();
 	private UserService userService = new UserServiceImpl(userDAO);
+	
+	private ReviewDAO reivewDAO = new ReviewDAO();
+	private ReviewService reviewService = new ReviewServiceImpl(reivewDAO);
+	
+
 	
     protected void doGet(
 			HttpServletRequest request, 
@@ -39,7 +48,7 @@ public class MyPageServlet extends HttpServlet {
     	
 		String path = request.getPathInfo();
 		String page = "";
-		System.out.println("/mypage/mypage");
+		System.out.println("/mypage/reviewinfo");
 
 		if(path==null || path.equals("")) {
 
@@ -48,9 +57,14 @@ public class MyPageServlet extends HttpServlet {
 			 System.out.println(userId);
 			 
 			 List<Users> usersList = userService.list();
-				request.setAttribute("usersList", usersList);	            
+				request.setAttribute("usersList", usersList);	
+				
+				List<Review> reviewList = reviewService.list();
+				request.setAttribute("reviewList", reviewList);
+				
+
 			 
-			page = "/page/mypage/mypage.jsp";
+			page = "/page/mypage/reviewinfo.jsp";
 			
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);

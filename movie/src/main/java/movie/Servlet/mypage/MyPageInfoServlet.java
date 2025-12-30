@@ -1,7 +1,6 @@
 package movie.Servlet.mypage;
 
 import java.io.IOException;
-import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,17 +9,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import movie.DAO.ReviewDAO;
-import movie.DAO.UserDAO;
-import movie.DTO.Review;
 import movie.DTO.Users;
-import movie.Service.ReviewService;
-import movie.Service.ReviewServiceImpl;
+import movie.DAO.UserDAO;
 import movie.Service.UserService;
 import movie.Service.UserServiceImpl;
 
-@WebServlet("/mypage/info")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/mypage/userinfo")
+public class MyPageInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private UserDAO userDAO = new UserDAO();
@@ -39,7 +34,7 @@ public class MyPageServlet extends HttpServlet {
     	
 		String path = request.getPathInfo();
 		String page = "";
-		System.out.println("/mypage/mypage");
+		System.out.println("/mypage/userinfo");
 
 		if(path==null || path.equals("")) {
 
@@ -47,11 +42,14 @@ public class MyPageServlet extends HttpServlet {
 			 String userId = user.getId();
 			 System.out.println(userId);
 			 
-			 List<Users> usersList = userService.list();
-				request.setAttribute("usersList", usersList);	            
 			 
-			page = "/page/mypage/mypage.jsp";
+            
+			 
 			
+			page = "/page/mypage/userinfo.jsp";
+			
+		 
+			request.setAttribute("user", user);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request,  response);
