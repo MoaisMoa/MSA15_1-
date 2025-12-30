@@ -139,7 +139,7 @@
 											<div class="mb-3">
 												<input type="text" class="form-control" name="userName" placeholder="이름"
 													readonly
-													value="${sessionScope.user != null ? sessionScope.user.username : '로그인 필요'}" />
+													value="${sessionScope.loginUser != null ? sessionScope.loginUser.username : '로그인 필요'}" />
 											</div>
 
 											<!-- 평점 -->
