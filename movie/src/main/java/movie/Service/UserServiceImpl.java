@@ -2,6 +2,7 @@ package movie.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -10,26 +11,34 @@ import movie.DTO.Users;
 
 public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements UserService {
 
-	
-	public UserServiceImpl(UserDAO dao) {
+public UserServiceImpl(UserDAO dao) {
 		super(dao);
 	}
+	
+	public UserServiceImpl() {
+	    super(new UserDAO());
+	}
+
 
 	@Override
-	public int join(Users user) {
+	public int signup(Users user) {
+		
 		try {
-			//비밀번호 암호화
+			user.setId(UUID.randomUUID().toString());
+			String username = user.getUsername();
 			String password = user.getPassword();
-			String encodedPassword = BCrypt.hashpw(password,BCrypt.gensalt());
+			String encodedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 			user.setPassword(encodedPassword);
+			user.setUsername(username);
 			//회원 등록
-			int result = dao.insert(user);
+			System.out.println("signup 비밀번호 암호화 햇다!");
+//			int result = dao.insert(user);
+			System.out.println("DEBUG username = " + user.getUsername());
 			//등록 성공
-			return result;	
+			return dao.insert(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//등록 실패
 		return 0;
 	}
 
@@ -55,29 +64,35 @@ public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements 
 		String username = user.getUsername();
 		String password = user.getPassword();
 		
+		if(user == null || user.getUsername() == null || user.getPassword() == null) {
+			return false;
+		}
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("username", username);
 		
-		Users joinedUser = null;
+		Users joinedUser;
 		try {
 			joinedUser = dao.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 		//아이디가 존재하지 않을 경우에
 		if(joinedUser == null) {
 			return false;
 		}
 		//비밀번호 일치 여부 확인
-		String joinedPassword = joinedUser.getPassword();
-		boolean result = BCrypt.checkpw(password, joinedPassword);
-		return result;
+//		String joinedPassword = joinedUser.getPassword();
+//		boolean result = BCrypt.checkpw(password, joinedPassword);
+//		return result;
+		return BCrypt.checkpw(user.getPassword(), joinedUser.getPassword());
 	}
 
 	@Override
 	public Users selectByUsername(String username) {
-		Map<String,Object> map = new HashMap<>();
-		map.put("username", username);
+		Map<String, Object> map = new HashMap<>();
+		map.put("username",username);
 		Users user = null;
 		try {
 			user = dao.selectBy(map);
@@ -85,5 +100,27 @@ public class UserServiceImpl extends BaseServiceImpl<UserDAO, Users> implements 
 			e.printStackTrace();
 		}
 		return user;
+	}
+	
+	public Users loginAndGetUser(String username, String password) {
+
+	    if (username == null || password == null) return null;
+
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("username", username);
+
+	    Users user;
+	    try {
+	        user = dao.selectBy(map);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+
+	    if (user == null) return null;
+	    if (!BCrypt.checkpw(password, user.getPassword())) return null;
+
+	    user.setPassword(null);
+	    return user;
 	}
 }

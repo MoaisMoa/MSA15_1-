@@ -38,8 +38,11 @@
 					  background-color:white;
 					  border-radius: 30px;
 					  z-index:1001;
+					  display:flex;
+					  flex-direction:column;
 		">
  <%-------------------------------------------------------------------------- --%>
+    <div style="flex:1; overflow-y:auto;">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -51,10 +54,11 @@
         <tbody>
             <c:forEach var="movie" items="${movieList}">
                 <tr style="cursor:pointer;"
-                            onclick="location.href='${root}/admin/movie/'">
+                            onclick="location.href='${root}/admin/movie/info?movie_id=${movie.movieId}'">
                     <td>${movie.title}</td>
                     <td>${movie.director}</td>
-                    <td><fmt:formatDate value="${movie.release_date}" pattern="yyyy-MM-dd"/></td>  
+                    <td><fmt:formatDate value="${movie.releaseDate}" pattern="yyyy-MM-dd"/>
+					</td>  
                 </tr>
             </c:forEach>
             <c:if test="${empty movieList}">
@@ -72,6 +76,7 @@
 		<a href="${root}/admin/movie/create" 
 		   class="btn btn-lg btn-secondary">추가</a>
 	</div>	
+	</div>
 			 
 
  <%-------------------------------------------------------------------------- --%>

@@ -18,3 +18,13 @@ body {
 placeholder {
 	color: red;
 }
+
+.rating-group .btn-check:checked+.rating-btn {
+	background-color: #7c5cff;
+	border-color: #7c5cff;
+	color: white;
+}
+
+.rating-btn {
+	min-width: 40px;
+}

@@ -1,3 +1,5 @@
+.project
+*/.project
 build/
 # Compiled class file
 *.class
@@ -12,7 +14,6 @@ build/
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
