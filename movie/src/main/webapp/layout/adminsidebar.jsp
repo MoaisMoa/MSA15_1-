@@ -44,6 +44,6 @@
      
     <button class="sidebar-btn user" onclick="location.href='${root}/admin/users/list'">user</button>
     <button class="sidebar-btn movie" onclick="location.href='${root}/admin/movie/list'">영화</button>    
-    <button class="sidebar-btn wc" onclick="location.href='adminwc.jsp'">월드컵</button>
+    <button class="sidebar-btn wc" onclick="location.href='${root}/admin/review/list'">리뷰</button>
      
 </div>
