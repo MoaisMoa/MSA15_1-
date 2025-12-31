@@ -38,29 +38,29 @@
         </thead>
         <tbody>
             <c:forEach var="review" items="${reviewList}">
-                <tr style="cursor:pointer;"
-                            onclick="location.href='${root}/mypage/reviewinfo?users_id=${user.no}'">        
-                    <td>${review.reviewId}</td>
-                   <td>
-					    <c:choose>
-					        <c:when test="${fn:length(review.content) > 30}">
-					            ${fn:substring(review.content, 0, 30)}...
-					        </c:when>
-					        <c:otherwise>
-					            ${review.content}
-					        </c:otherwise>
-					    </c:choose>
-					</td>
-
-                    <td>${review.rating}</td>
-                    <td><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd"/></td>        
-                </tr>
-            </c:forEach>
-            <c:if test="${empty usersList}">
-                <tr>
-                    <td colspan="3" class="text-center">작성한 리뷰가 없습니다.</td>
-                </tr>
-            </c:if>
+			    <tr style="cursor:pointer;"      
+			        onclick="location.href='${pageContext.request.contextPath}/review?id=${review.movieId}'">        
+			        <td>${review.reviewId}</td>
+			        <td>
+			            <c:choose>
+			                <c:when test="${fn:length(review.content) > 30}">
+			                    ${fn:substring(review.content, 0, 30)}...
+			                </c:when>
+			                <c:otherwise>
+			                    ${review.content}
+			                </c:otherwise>
+			            </c:choose>
+			        </td>
+			        <td>${review.rating}</td>
+			        <td><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd"/></td>        
+			    </tr>
+			</c:forEach>
+			
+			<c:if test="${empty reviewList}">
+			    <tr>
+			        <td colspan="4" class="text-center">작성한 리뷰가 없습니다.</td>
+			    </tr>
+			</c:if>
         </tbody>
     </table>
 	</div>

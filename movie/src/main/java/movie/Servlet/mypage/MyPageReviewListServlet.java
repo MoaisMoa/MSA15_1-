@@ -10,57 +10,39 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import movie.DAO.ReviewDAO;
-import movie.DAO.UserDAO;
 import movie.DTO.Review;
 import movie.DTO.Users;
 import movie.Service.ReviewService;
 import movie.Service.ReviewServiceImpl;
-import movie.Service.UserService;
-import movie.Service.UserServiceImpl;
+import movie.DAO.ReviewDAO;
 
 @WebServlet("/mypage/reviewlist")
 public class MyPageReviewListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private UserDAO userDAO = new UserDAO();
-	private UserService userService = new UserServiceImpl(userDAO);
-	
-	private ReviewDAO reivewDAO = new ReviewDAO();
-	private ReviewService reviewService = new ReviewServiceImpl(reivewDAO);
-	
-    protected void doGet(
-			HttpServletRequest request, 
-			HttpServletResponse response
-			) throws ServletException, IOException {
-    	
-    	HttpSession session = request.getSession(false);
-    	if(session == null || session.getAttribute("username") == null) {
-    		response.sendRedirect(request.getContextPath() + "/page/user/login.jsp");
-    			return;
-    	}
-    	
-		String path = request.getPathInfo();
-		String page = "";
-		System.out.println("/mypage/reviewlist");
+    private ReviewDAO reviewDAO = new ReviewDAO();
+    private ReviewService reviewService = new ReviewServiceImpl(reviewDAO);
 
-		if(path==null || path.equals("")) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-			 Users user = (Users) session.getAttribute("loginUser");
-			 String userId = user.getId();
-			 System.out.println(userId);
-			 
-			 List<Users> usersList = userService.list();
-				request.setAttribute("usersList", usersList);	
-				
-				List<Review> reviewList = reviewService.list();
-				request.setAttribute("reviewList", reviewList);
-			 
-			page = "/page/mypage/reviewlist.jsp";
-			
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request,  response);
-	}
-    
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("loginUser") == null) {
+            response.sendRedirect(request.getContextPath() + "/page/user/login.jsp");
+            return;
+        }
+
+        Users user = (Users) session.getAttribute("loginUser");
+        int userId = user.getNo(); 
+
+        System.out.println("로그인한 사용자 ID: " + userId);
+
+        // 로그인한 사용자 기준으로 리뷰만 조회
+        List<Review> reviewList = reviewService.selectByUserId(userId);
+        request.setAttribute("reviewList", reviewList);
+
+        String page = "/page/mypage/reviewlist.jsp";
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        dispatcher.forward(request, response);
+    }
 }
