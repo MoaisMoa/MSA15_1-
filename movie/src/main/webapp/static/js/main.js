@@ -1,159 +1,168 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  /* ===================== 메인 배너 ===================== */
+
   const bannerTrack = document.querySelector('.banner-track');
-  const banners = document.querySelectorAll('.banner-link');
-  const bannerCount = banners.length;
+  if (bannerTrack) {
 
-  let bannerIndex = 0;       // 현재 보여지는 배너
-  let isAnimating = false;   // 애니메이션 중복 방지
-  let isPaused = false;      // 마우스 오버시 슬라이드 정지
+    const banners = bannerTrack.querySelectorAll('.banner-link');
+    const bannerCount = banners.length;
 
-  // 배너 이동 함수
-  function moveBanner(index, transition = true) {
-    bannerTrack.style.transition = transition ? 'transform 0.6s ease' : 'none';
-    bannerTrack.style.transform = `translateX(-${index * 100}%)`;
-  }
+    const BANNER_SLIDE_TIME = 900;
+    const BANNER_DELAY = 3000;
 
-  // 다음 배너
-  function nextBanner() {
-    if (isAnimating) return;
-    isAnimating = true;
+    let bannerIndex = 0;
+    let isAnimating = false;
+    let isPaused = false;
+    let bannerTimer = null;
 
-    bannerIndex++;
+    // ▶ 클론
+    bannerTrack.appendChild(banners[0].cloneNode(true));
 
-    if (bannerIndex >= bannerCount) {
-      bannerIndex = 0;
-      moveBanner(bannerIndex, false);
-
-      setTimeout(() => {
-        bannerIndex++;
-        moveBanner(bannerIndex);
-        setTimeout(() => { isAnimating = false; }, 600);
-      }, 20);
-    } else {
-      moveBanner(bannerIndex);
-      setTimeout(() => { isAnimating = false; }, 600);
-    }
-  }
-
-  // 이전 배너
-  function prevBanner() {
-    if (isAnimating) return;
-    isAnimating = true;
-
-    bannerIndex--;
-    if (bannerIndex < 0) {
-      bannerIndex = bannerCount - 1;
-      moveBanner(bannerIndex, false);
-    } else {
-      moveBanner(bannerIndex);
+    function moveBanner(index, smooth = true) {
+      bannerTrack.style.transition = smooth
+        ? `transform ${BANNER_SLIDE_TIME}ms ease`
+        : 'none';
+      bannerTrack.style.transform = `translateX(-${index * 100}%)`;
     }
 
-    setTimeout(() => { isAnimating = false; }, 600);
-  }
+    function nextBanner() {
+      if (isAnimating) return;
+      isAnimating = true;
 
-  // 자동 슬라이드
-  const autoSlide = setInterval(() => {
-    if (!isPaused) nextBanner();
-  }, 3000);
-	
-  const banner = document.querySelector('.main-banner');							/*--------------*/
-  banner.addEventListener('mouseenter', () => isPaused = true);                    /*--------------*/
-  banner.addEventListener('mouseleave', () => isPaused = false);					/*--------------*/
+      bannerIndex++;
+      moveBanner(bannerIndex, true);
 
-  // 화살표 클릭
-  document.querySelector('.banner-btn.next').addEventListener('click', nextBanner);
-  document.querySelector('.banner-btn.prev').addEventListener('click', prevBanner);
+      if (bannerIndex === bannerCount) {
+        setTimeout(() => {
+          bannerIndex = 0;
+          moveBanner(bannerIndex, false);
+          isAnimating = false;
+        }, BANNER_SLIDE_TIME);
+      } else {
+        setTimeout(() => isAnimating = false, BANNER_SLIDE_TIME);
+      }
+    }
 
-  
-  
-  
-  
-  // ===================== 영화 목록 슬라이드 =====================
-  const movieList = document.querySelector('.movie-list');
-  const movies = Array.from(document.querySelectorAll('.movie'));
+    function prevBanner() {
+      if (isAnimating) return;
+      isAnimating = true;
 
-  const step = 2;
-  const itemWidth = movies[0].offsetWidth + 20;
-  const realCount = movies.length;
-  const cloneCount = 4;
-  const SLIDE_DELAY = 3000;
-  const SLIDE_TIME = 600; // ⭐ CSS랑 반드시 맞출 것
+      if (bannerIndex === 0) {
+        bannerTrack.style.transition = 'none';
+        bannerIndex = bannerCount;
+        moveBanner(bannerIndex, false);
 
-  // ================= 클론 생성 =================
-  movies.slice(0, cloneCount).forEach(v => {
-    movieList.appendChild(v.cloneNode(true));
-  });
+        requestAnimationFrame(() => {
+          bannerIndex--;
+          moveBanner(bannerIndex, true);
+          setTimeout(() => isAnimating = false, BANNER_SLIDE_TIME);
+        });
+      } else {
+        bannerIndex--;
+        moveBanner(bannerIndex, true);
+        setTimeout(() => isAnimating = false, BANNER_SLIDE_TIME);
+      }
+    }
 
-  // ================= 상태 =================
-  let movieIndex = 0;
-  let timer = null;
+    function startBanner() {
+      bannerTimer = setInterval(() => {
+        if (!isPaused && !isAnimating) nextBanner();
+      }, BANNER_DELAY);
+    }
 
-  // ================= 이동 =================
-  function moveMovie(index, smooth = true) {
-    movieList.scrollTo({
-      left: index * itemWidth,
-      behavior: smooth ? 'smooth' : 'auto'
+    startBanner();
+
+    document.querySelector('.banner-btn.next').onclick = nextBanner;
+    document.querySelector('.banner-btn.prev').onclick = prevBanner;
+
+    /* ▶ 배너 클릭 시 상세페이지 이동 */
+    banners.forEach(banner => {
+      banner.addEventListener('click', (e) => {
+        e.preventDefault();
+        const movieId = banner.dataset.id;
+        location.href = contextPath + `/detail?id=${movieId}`;
+      });
     });
-  }
 
-  // ================= 핵심 리셋 (수정됨) =================
-  function resetIfNeeded() {
-    // C1,C2,C3,C4 까지 "슬라이드 완료 후" 리셋
-    if (movieIndex >= realCount) {
-      setTimeout(() => {
-        movieIndex = 0;
-        moveMovie(movieIndex, false); // 0초 순간이동
-      }, SLIDE_TIME);
+    /* ▶ 상세페이지 버튼 */
+    const detailBtn = document.querySelector('.detail-btn');
+    if (detailBtn) {
+      detailBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const realIndex = bannerIndex % bannerCount;
+        const movieId = banners[realIndex].dataset.id;
+        location.href = contextPath + `/detail?id=${movieId}`;
+      });
     }
   }
 
-  // ================= 자동 슬라이드 =================
-  function startMovieSlide() {
-    if (timer) return;
+  /* ===================== 영화 목록 슬라이드 ===================== */
 
-    timer = setInterval(() => {
-      movieIndex += step;
-      moveMovie(movieIndex, true);
-      resetIfNeeded();
-    }, SLIDE_DELAY);
-  }
+  const movieListEl = document.querySelector('.movie-list');
+  if (movieListEl) {
 
-  function stopMovieSlide() {
-    clearInterval(timer);
-    timer = null;
-  }
+    const movies = Array.from(movieListEl.querySelectorAll('.movie'));
+    const movieCount = movies.length;
 
-  // ================= 실행 =================
-  startMovieSlide();
+    const step = 2;
+    const itemWidth = movies[0].offsetWidth + 20;
+    const cloneCount = 4;
+    const MOVIE_DELAY = 3000;
 
-  // ================= hover =================
-  movieList.addEventListener('mouseenter', stopMovieSlide);
-  movieList.addEventListener('mouseleave', startMovieSlide);
+    // ▶ 클론
+    movies.slice(0, cloneCount).forEach(m => {
+      movieListEl.appendChild(m.cloneNode(true));
+    });
 
-  // ================= 화살표 =================
-  document.querySelector('.arrow.right').addEventListener('click', () => {
-    stopMovieSlide();
+    let movieIndex = 0;
+    let movieTimer = null;
 
-    movieIndex += step;
-    moveMovie(movieIndex, true);
-    resetIfNeeded();
-
-    startMovieSlide();
-  });
-
-  document.querySelector('.arrow.left').addEventListener('click', () => {
-    stopMovieSlide();
-
-    movieIndex -= step;
-    if (movieIndex < 0) {
-      movieIndex = realCount - step;
-      moveMovie(movieIndex, false);
-    } else {
-      moveMovie(movieIndex, true);
+    function moveMovie(index, smooth = true) {
+      movieListEl.scrollTo({
+        left: index * itemWidth,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
     }
 
-    startMovieSlide();
-  });
+    function startMovie() {
+      movieTimer = setInterval(() => {
+        movieIndex += step;
+        if (movieIndex >= movieCount) {
+			
+          movieIndex = 0;
+          moveMovie(movieIndex, false);
+        } else {
+          moveMovie(movieIndex, true);
+        }
+      }, MOVIE_DELAY);
+    }
+
+    function stopMovie() {
+      clearInterval(movieTimer);
+      movieTimer = null;
+    }
+
+    startMovie();
+
+    movieListEl.addEventListener('mouseenter', stopMovie);
+    movieListEl.addEventListener('mouseleave', startMovie);
+
+    document.querySelector('.arrow.right').onclick = () => {
+      stopMovie();
+      movieIndex = Math.min(movieCount - 1, movieIndex + step);
+      moveMovie(movieIndex, true);
+      startMovie();
+    };
+
+    document.querySelector('.arrow.left').onclick = () => {
+      stopMovie();
+      movieIndex = Math.max(0, movieIndex - step);
+      moveMovie(movieIndex, true);
+      startMovie();
+    };
+  }
+
 
 
 });

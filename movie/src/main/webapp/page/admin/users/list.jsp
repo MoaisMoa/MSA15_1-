@@ -31,9 +31,12 @@
 					  background-color:white;
 					  border-radius: 30px;
 					  z-index:1001;
+					  display:flex;
+					  flex-direction:column;
 		">
 		
 		<%-- 유저 정보 게시판 --%>
+		<div style="flex:1; overflow-y:auto;">
 		<table class="table table-striped">
         <thead>
             <tr>
@@ -45,8 +48,8 @@
         <tbody>
             <c:forEach var="user" items="${usersList}">
                 <tr style="cursor:pointer;"
-                            onclick="location.href='${root}/admin/users/detail?users_id=${user.no}'">        
-                    <td>${user.id}</td>
+                            onclick="location.href='${root}/admin/users/info?users_id=${user.no}'">        
+                    <td>${user.username}</td>
                     <td>${user.name}</td>
                     <td><fmt:formatDate value="${user.createdAt}" pattern="yyyy-MM-dd"/></td>        
                 </tr>
@@ -58,6 +61,7 @@
             </c:if>
         </tbody>
     </table>
+	</div>
 
 
 		<%-- 게시판 끝 --%>

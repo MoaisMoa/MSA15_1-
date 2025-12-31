@@ -26,38 +26,32 @@
     		</div>
     		
     		
-			<div class="container-fluid mt-5"
-				 style="max-width: 600px;">
-    		<table class="table table-striped table-hover mb-4  ">
-    		<thead>
-	    		<tr>
-		    		<th scope="col">#</th>
-		    		<th scope="col">영화</th>
-		    		<th scope="col">제목</th>
-		    		<th scope="col">작성일</th>
-		    		<th scope="col">관리</th>
-	    		</tr>
-    		</thead>
-	    		<tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				      <td>
-				      	<a href="${root}/page/board/mypage_r_m.jsp?id=${users.user_id}" class="btn btn-sm btn-primary">관리</a>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				    </tr>
-	    		</tbody>
-    		</table>
-		
-			</div>
+			<div style="flex:1; overflow-y:auto;">
+		<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>평점</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="review" items="${reviewList}">
+                <tr style="cursor:pointer;"
+                            onclick="location.href='${root}/mypage/reviewinfo?users_id=${user.no}'">        
+                    <td>${review.reviewId}</td>
+                    <td>${review.rating}</td>
+                    <td><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd"/></td>        
+                </tr>
+            </c:forEach>
+            <c:if test="${empty usersList}">
+                <tr>
+                    <td colspan="3" class="text-center">작성한 리뷰가 없습니다.</td>
+                </tr>
+            </c:if>
+        </tbody>
+    </table>
+	</div>
 			 
 			 
 			 <div class = "d-flex justify-content-end gap-2"

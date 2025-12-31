@@ -13,13 +13,13 @@
 	MovieService movieService = new MovieServiceImpl(movieDAO);
 	List<Movie> movieList = null;
 	try {
-		movieList = movieService.list();
+		movieList = movieService.list(); // 전체 영화 리스트
 	} catch (Exception e) {
 		e.printStackTrace();
 	}	
 	request.setAttribute("movieList", movieList);
 %>
-    
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -33,109 +33,75 @@
 
 <body>
 
-  <!-- 헤더 -->
-  <header class="header">
+<jsp:include page="/layout/header.jsp" />
 
-    <h1 class="maintitle">
-  		<a href="${root}/index.jsp" class="title-link">
-    사이트 제목
-  		</a>
-	</h1>
-	<div class="search-wrapper">
-    <input type="text" class="search" placeholder="영화 검색..." />
-	</div>
-
-    <div class="right-menu">
-		  <a href="${root}/tournament.jsp" class="menu-btn">영화 토너먼트</a>
-		  <a href="${root}/mypage.jsp" class="menu-btn">마이페이지</a>
-	</div>
-  </header>
-  <!-- 메인 배너 -->
+<!-- ================= 메인 배너 ================= -->
 <section class="main-banner">
-  <div class="banner-track">
-		<c:forEach var="movie" items="${movieList}">
-		    <a href="${root}/detail?id=${movie.movieId}" class="banner-link">
-		      <img src="${root}${movie.imgPath}"
-		           alt="인터스텔라">
-		    </a>
-		</c:forEach>
-		
-		
-<%--     <a href="${root}/movieDetail.jsp?id=1" --%>
-<!--        class="banner-link"> -->
-<%--       <img src="${root}/static/img/movie/인터스텔라.jpg" --%>
-<!--            alt="인터스텔라"> -->
-<!--     </a> -->
+    <div class="banner-track">
+        <a href="${root}/movie/detail?id=8" class="banner-link" data-id="8">
+            <img src="${root}/static/img/movie/야당.jpg" alt="야당">
+        </a>
+        <a href="${root}/movie/detail?id=1" class="banner-link" data-id="1">
+            <img src="${root}/static/img/movie/인터스텔라.jpg" alt="인터스텔라">
+        </a>
+        <a href="${root}/movie/detail?id=5" class="banner-link" data-id="5">
+            <img src="${root}/static/img/movie/서울의봄.jpg" alt="서울의봄">
+        </a>
+        <a href="${root}/movie/detail?id=15" class="banner-link" data-id="15">
+            <img src="${root}/static/img/movie/한산.jpg" alt="한산">
+        </a>
+    </div>
 
-<%--     <a href="${root}/movieDetail.jsp?id=5" --%>
-<!--        class="banner-link"> -->
-<%--       <img src="${root}/static/img/movie/서울의봄.jpg" --%>
-<!--            alt="서울의봄"> -->
-<!--     </a> -->
+    <a href="#" class="detail-btn">상세페이지</a>
 
-<%--     <a href="${root}/movieDetail.jsp?id=8" --%>
-<!--        class="banner-link"> -->
-<%--       <img src="${root}/static/img/movie/야당.jpg" --%>
-<!--            alt="야당"> -->
-<!--     </a> -->
-    
-<%--     <a href="${root}/movieDetail.jsp?id=15" --%>
-<!--        class="banner-link"> -->
-<%--       <img src="${root}/static/img/movie/한산.jpg" --%>
-<!--            alt="한산"> -->
-<!--     </a> -->
-    
-<%--     <a href="${root}/movieDetail.jsp?id=1" --%>
-<!--        class="banner-link clone"> -->
-<%--       <img src="${root}/static/img/movie/인터스텔라.jpg" --%>
-<!--            alt="인터스텔라"> -->
-<!--     </a> -->
+    <div class="banner-progress-wrapper">
+        <div class="banner-progress"></div>
+    </div>
 
-  </div>
-   <a href="movieDetail.jsp" class="detail-btn">
-    상세페이지
-  </a>
-   <!--  <div class="banner-progress-wrapper">
-    	<div class="banner-progress"></div>
- 	</div> -->
-
-  <!-- 좌우 버튼 -->
-  <button class="banner-btn prev">〈</button>
-  <button class="banner-btn next">〉</button>
-
+    <!-- 좌우 버튼 -->
+    <button class="banner-btn prev">〈</button>
+    <button class="banner-btn next">〉</button>
 </section>
 
 
 
+<!-- ================= 영화 목록 ================= -->
+<section class="movie-section">
+  <button class="arrow left">〈</button>
+  <div class="movie-list">
+    <c:forEach var="movie" items="${movieList}">
+      <div class="movie">
+        <a href="${root}/detail?id=${movie.movieId}" class="movie-link">
+          <img src="${root}${movie.detailImgPath}" alt="${movie.title}">
+        </a>
+        <a href="${root}/detail?id=${movie.movieId}" class="movie-text-link">
+          <div class="movie-info">
+            <span class="movie-title">${movie.title}</span>
+            <span class="movie-year">
+              <fmt:formatDate value="${movie.releaseDate}" pattern="yyyy" />
+            </span>
+          </div>
+        </a>
+      </div>	
+    </c:forEach>
+  </div>
+  <button class="arrow right">〉</button>
+</section>
 
-	<%-- <c:forEach var="movie" items="${movieList}">
-		    <a href="${root}/detail?id=${movie.movieId}" class="banner-link">
-		      <img src="${root}${movie.imgPath}"
-		           alt="인터스텔라">
-		    </a>
-		</c:forEach> --%>
+<jsp:include page="/footer.jsp" />
+<jsp:include page="/layout/script.jsp" />
 
-  <!-- 영화 목록 -->
-  <section class="movie-section">
-    <button class="arrow left">〈</button>
+<!-- JSP에서 JS로 영화 데이터 전달 -->
+<script>
+  const contextPath = "${pageContext.request.contextPath}";
+  const movies = [
+    <c:forEach var="movie" items="${movieList}" varStatus="s">
+      { id: ${movie.movieId}, title: "${movie.title}" }<c:if test="${!s.last}">,</c:if>
+    </c:forEach>
+  ]; 
+</script>
 
-    <div class="movie-list">
-    	<c:forEach var="movie" items="${movieList}">
-		    <a href="${root}/detail?id=${movie.movieId}" class="banner-link">
-		      <img src="${root}${movie.imgPath}"
-		           alt="인터스텔라">
-		    </a>
-		</c:forEach>
-    </div>
 
-    <button class="arrow right">〉</button>
-  </section>
 
-  <!-- 푸터 -->
-  <footer>
-    <p>© 2025 MOVIE PICK. All rights reserved.</p>
-	<p>영화 데이터 출처: TMDB API</p>
-  </footer>
-<script src="${root}/static/js/main.js"></script>
 </body>
 </html>

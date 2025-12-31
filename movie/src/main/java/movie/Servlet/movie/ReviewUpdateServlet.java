@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.catalina.User;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import movie.DAO.ReviewDAO;
 import movie.DTO.Review;
+import movie.DTO.Users;
 import movie.Service.ReviewService;
 import movie.Service.ReviewServiceImpl;
 
@@ -27,8 +30,8 @@ public class ReviewUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // 임시로 사용자 ID를 1로 고정 (로그인 구현 전)
-            int userId = 1;
+        	Users loginUser = (Users) request.getSession().getAttribute("loginUser");
+            
 
             // 파라미터
             Integer reviewId = Integer.parseInt(request.getParameter("reviewId"));
@@ -42,7 +45,7 @@ public class ReviewUpdateServlet extends HttpServlet {
             System.out.println("movieId : " + movieId);
             System.out.println("content : " + content);
             System.out.println("rating : " + rating);
-            System.out.println("userId : " + userId);
+            System.out.println("userId : " + loginUser.getNo());
 
             // 기존 리뷰 조회
             Map<String, Object> reviewMap = new HashMap<>();
@@ -56,7 +59,7 @@ public class ReviewUpdateServlet extends HttpServlet {
             }
 
             // 작성자 확인
-            if (review.getUserId() != userId) {
+            if (review.getUserId() != loginUser.getNo()) {
                 System.out.println("본인이 작성한 리뷰만 수정할 수 있습니다.");
                 response.sendRedirect(request.getContextPath() + "/review?id=" + movieId);
                 return;

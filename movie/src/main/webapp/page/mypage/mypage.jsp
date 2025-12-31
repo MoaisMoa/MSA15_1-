@@ -65,33 +65,27 @@
 				border-radius: 30px;		 
 		 ">
 		 
-		 <div style="width: 100px;
-					 height: 100px;
-					 margin-left: 43px;
-					 margin-top: 60px;
-					 background-color: #D4CDFF;
-					 border-radius: 80px;
-		 ">
-		 </div>
 		 
 		 <div style="
 					width: 500px;
 					height: 90px;
+					margin-top:60px;
+					
 
 					background-color:white;
 		 ">
 		 
 
-		 <h1 style="margin-top:20px;
-		 			margin-left:45px;
-		 			font-size: 32px;
-		 ">아이디</h1>
-		 
-		 <p style="margin-top:0px;
-		 		   margin-left:45px;
-		 		   font-size:16px;
-		 ">@sample@gmail.com
-		 </p>
+		  <h1 style="margin-top:20px; 
+		  			 margin-left:45px; 
+		  			 font-size: 32px;">
+            		 ${user.username}
+        </h1>
+        <p style="margin-top:0px; 
+        		  margin-left:45px; 
+        		  font-size:16px;">
+            	  ${user.email}
+        </p>
 
 		 
 		 </div>
@@ -101,10 +95,10 @@
 					
 					">
 		    <button class="r_btn" 
-		    onclick="location.href='mypage_r.jsp'">내 리뷰 보기</button>
+		    onclick="location.href='${root}/mypage/reviewlist?users_id=${user.no}'">내 리뷰 보기</button>
 		    
 		    <button class="p_btn" 
-		    onclick="location.href='mypage_p.jsp'">프로필 수정</button>      
+		    onclick="location.href='${root}/mypage/userinfo?users_id=${user.no}'">내 정보 보기</button>      
 		</div>
 	</div>
 	
