@@ -35,7 +35,7 @@
                       enctype="multipart/form-data">
 
                     <input type="hidden" name="movie_id" value="${movie.movieId}">
-                    <input type="hidden" name="old_img_path" value="${movie.imgPath}">
+                    <input type="hidden" name="old_img_path" value="${movie.detailImgPath}">
 
                     <!-- 번호 -->
                     <div class="mb-3">
@@ -48,9 +48,9 @@
                     <div class="mb-3">
                         <label>포스터</label>
 
-                        <c:if test="${not empty movie.imgPath}">
+                        <c:if test="${not empty movie.detailImgPath}">
                             <div class="mb-2">
-                                <img src="${pageContext.request.contextPath}${movie.imgPath}"
+                                <img src="${pageContext.request.contextPath}${movie.detailImgPath}"
                                      style="max-width:200px; border-radius:10px;">
                             </div>
                         </c:if>
