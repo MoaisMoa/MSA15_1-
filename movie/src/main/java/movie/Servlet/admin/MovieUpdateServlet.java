@@ -23,7 +23,7 @@ import movie.Service.MovieServiceImpl;
 
 @WebServlet("/admin/movie/update")
 @MultipartConfig(
-    maxFileSize = 1024 * 1024 * 10,      // 10MB
+    maxFileSize = 1024 * 1024 * 10,      
     maxRequestSize = 1024 * 1024 * 10
 )
 public class MovieUpdateServlet extends HttpServlet {
@@ -46,7 +46,7 @@ public class MovieUpdateServlet extends HttpServlet {
         String actor = request.getParameter("actor");
         String country = request.getParameter("country");
         String description = request.getParameter("description");
-        String oldDetailImgPath = request.getParameter("old_img_path"); // hidden으로 전달
+        String oldDetailImgPath = request.getParameter("old_img_path"); 
         String releaseDateStr = request.getParameter("release_date");
         String playTimeStr = request.getParameter("play_time");
         String[] genres = request.getParameterValues("genre");
@@ -61,9 +61,7 @@ public class MovieUpdateServlet extends HttpServlet {
             releaseDate = java.sql.Date.valueOf(releaseDateStr);
         }
 
-        /* =========================
-           이미지 업로드 처리
-        ========================= */
+
         Part posterPart = request.getPart("poster");
 
         // 기존 이미지 유지
@@ -96,9 +94,7 @@ public class MovieUpdateServlet extends HttpServlet {
             }
         }
 
-        /* =========================
-           Movie 업데이트
-        ========================= */
+
         Movie movie = Movie.builder()
                 .movieId(movieId)
                 .title(title)
@@ -107,7 +103,7 @@ public class MovieUpdateServlet extends HttpServlet {
                 .actor(actor)
                 .country(country)
                 .description(description)
-                .detailImgPath(detailImgPath) // ✅ detailImgPath 적용
+                .detailImgPath(detailImgPath) 
                 .playTime(playTime)
                 .releaseDate(releaseDate)
                 .build();
