@@ -31,6 +31,7 @@
         <thead>
             <tr>
                 <th>번호</th>
+                <th>내용</th>
                 <th>평점</th>
                 <th>작성일</th>
             </tr>
@@ -40,6 +41,17 @@
                 <tr style="cursor:pointer;"
                             onclick="location.href='${root}/mypage/reviewinfo?users_id=${user.no}'">        
                     <td>${review.reviewId}</td>
+                   <td>
+					    <c:choose>
+					        <c:when test="${fn:length(review.content) > 30}">
+					            ${fn:substring(review.content, 0, 30)}...
+					        </c:when>
+					        <c:otherwise>
+					            ${review.content}
+					        </c:otherwise>
+					    </c:choose>
+					</td>
+
                     <td>${review.rating}</td>
                     <td><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd"/></td>        
                 </tr>
