@@ -123,4 +123,19 @@ public UserServiceImpl(UserDAO dao) {
 	    user.setPassword(null);
 	    return user;
 	}
+	
+	@Override
+	public boolean update(Users user) {
+	    try {
+	        // PK 기준으로 업데이트
+	        Map<String, Object> pkMap = new HashMap<>();
+	        pkMap.put("no", user.getNo());
+	        int result = dao.updateBy(user, pkMap);  // updateBy는 PK 기준으로 DB 반영
+	        System.out.println("updateBy 실행 결과: " + result);
+	        return result > 0;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 }
