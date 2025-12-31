@@ -46,7 +46,7 @@ public class MovieUpdateServlet extends HttpServlet {
         String actor = request.getParameter("actor");
         String country = request.getParameter("country");
         String description = request.getParameter("description");
-        String oldImgPath = request.getParameter("old_img_path");
+        String oldDetailImgPath = request.getParameter("old_img_path"); // hidden으로 전달
         String releaseDateStr = request.getParameter("release_date");
         String playTimeStr = request.getParameter("play_time");
         String[] genres = request.getParameterValues("genre");
@@ -66,15 +66,14 @@ public class MovieUpdateServlet extends HttpServlet {
         ========================= */
         Part posterPart = request.getPart("poster");
 
-        // 기본은 기존 이미지
-        String imgPath = oldImgPath;
+        // 기존 이미지 유지
+        String detailImgPath = oldDetailImgPath;
 
         if (posterPart != null && posterPart.getSize() > 0) {
 
             String fileName = Paths.get(posterPart.getSubmittedFileName())
                                    .getFileName()
                                    .toString();
-
             String ext = fileName.substring(fileName.lastIndexOf("."));
             String saveFileName = UUID.randomUUID() + ext;
 
@@ -86,12 +85,12 @@ public class MovieUpdateServlet extends HttpServlet {
 
             posterPart.write(uploadDir + File.separator + saveFileName);
 
-            imgPath = "/static/img/movie/" + saveFileName;
+            detailImgPath = "/static/img/movie/" + saveFileName;
 
-            // 기존 이미지 파일 삭제 (선택)
-            if (oldImgPath != null && !oldImgPath.isEmpty()) {
+            // 기존 파일 삭제
+            if (oldDetailImgPath != null && !oldDetailImgPath.isEmpty()) {
                 File oldFile = new File(
-                        getServletContext().getRealPath(oldImgPath)
+                        getServletContext().getRealPath(oldDetailImgPath)
                 );
                 if (oldFile.exists()) oldFile.delete();
             }
@@ -108,7 +107,7 @@ public class MovieUpdateServlet extends HttpServlet {
                 .actor(actor)
                 .country(country)
                 .description(description)
-                .imgPath(imgPath)
+                .detailImgPath(detailImgPath) // ✅ detailImgPath 적용
                 .playTime(playTime)
                 .releaseDate(releaseDate)
                 .build();
@@ -116,12 +115,12 @@ public class MovieUpdateServlet extends HttpServlet {
         try {
             movieService.update(movie);
 
-            // 장르 초기화
+            // 기존 장르 삭제
             Map<String, Object> map = new HashMap<>();
             map.put("movie_id", movieId);
             movieGenreDAO.deleteBy(map);
 
-            // 장르 재등록
+            // 새로운 장르 저장
             if (genres != null) {
                 for (String g : genres) {
                     MovieGenre mg = MovieGenre.builder()
