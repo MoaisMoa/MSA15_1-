@@ -1,22 +1,32 @@
 package movie.Servlet.admin;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import movie.DAO.MovieDAO;
 import movie.DAO.MovieGenreDAO;
 import movie.DTO.Movie;
 import movie.DTO.MovieGenre;
 import movie.Service.MovieService;
 import movie.Service.MovieServiceImpl;
+import java.nio.file.Paths;
 
 @WebServlet("/admin/movie/*")
+@MultipartConfig(
+	    maxFileSize = 1024 * 1024 * 10,      // 10MB
+	    maxRequestSize = 1024 * 1024 * 10
+	)
 public class MovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -72,7 +82,6 @@ public class MovieServlet extends HttpServlet {
 	        String actor = request.getParameter("actor");
 	        String country = request.getParameter("country");
 	        String description = request.getParameter("description");
-	        String imgPath = request.getParameter("img_path");
 	        String releaseDateStr = request.getParameter("release_date");
 	        String playTimeStr = request.getParameter("play_time");
 	        
@@ -88,7 +97,33 @@ public class MovieServlet extends HttpServlet {
 	        if(releaseDateStr != null && !releaseDateStr.isEmpty()) {
 	            releaseDate = java.sql.Date.valueOf(releaseDateStr);
 	        }
+	        
 
+	        Part posterPart = request.getPart("poster");
+
+	        String imgPath = null;
+
+	        if (posterPart != null && posterPart.getSize() > 0) {
+	            String fileName = Paths.get(posterPart.getSubmittedFileName())
+	                                   .getFileName()
+	                                   .toString();
+
+	            String ext = fileName.substring(fileName.lastIndexOf("."));
+	            String saveFileName = UUID.randomUUID() + ext;
+
+	            String uploadDir = getServletContext()
+	                    .getRealPath("/static/img/movie");
+
+	            File dir = new File(uploadDir);
+	            if (!dir.exists()) dir.mkdirs();
+
+	            posterPart.write(uploadDir + File.separator + saveFileName);
+
+	            imgPath = "/static/img/movie/" + saveFileName;
+	            
+	            System.out.println("업로드 경로 = " + uploadDir);
+	        
+	        }
 
 	        Movie movie = Movie.builder()
 	                .title(title)

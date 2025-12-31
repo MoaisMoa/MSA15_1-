@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,55 +11,71 @@
     <jsp:include page="/layout/meta.jsp" />
     <jsp:include page="/layout/link.jsp" />
 </head>
+
 <body>
-    <jsp:include page="/layout/adminheader.jsp" />
-    <jsp:include page="/layout/adminsidebar.jsp" />
+<jsp:include page="/layout/adminheader.jsp" />
+<jsp:include page="/layout/adminsidebar.jsp" />
 
 <div class="container">
     <div style="position:fixed; top:140px; left:320px; right:40px;">
-        <h1 style="font-size:40px; color: #7D81CA;">영화 정보</h1>
+        <h1 style="font-size:40px; color:#7D81CA;">영화 정보</h1>
     </div>
 
-    <div style="position:fixed; top:220px; left:320px; right:40px; bottom:40px; 
-                padding:40px; background-color:white; border-radius:30px; 
-                z-index:1001; display:flex; flex-direction:column;">
+    <div style="position:fixed; top:220px; left:320px; right:40px; bottom:40px;
+                padding:40px; background:white; border-radius:30px;
+                display:flex; flex-direction:column;">
 
-        <div class="row justify-content-center" style="flex:1; overflow-y:auto; margin-top:10px;">
-            <div class="col-12 col-md-10 col-lg-10">
+        <div class="row justify-content-center" style="flex:1; overflow-y:auto;">
+            <div class="col-12 col-md-10">
 
-                <!-- 수정/삭제 폼 -->
-                <form id="movieForm" method="post" action="${root}/admin/movie/update">
-                    <input type="hidden" name="movie_id" value="${movie.movieId}" />
+                <!-- 수정 폼 -->
+                <form id="movieForm"
+                      method="post"
+                      action="${root}/admin/movie/update"
+                      enctype="multipart/form-data">
 
+                    <input type="hidden" name="movie_id" value="${movie.movieId}">
+                    <input type="hidden" name="old_img_path" value="${movie.imgPath}">
+
+                    <!-- 번호 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">넘버</label>
-                        <input type="text" class="form-control" value="${movie.movieId}" readonly>
+                        <label>넘버</label>
+                        <input type="text" class="form-control"
+                               value="${movie.movieId}" readonly>
                     </div>
 
+                    <!-- 포스터 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">포스터</label>
-                        <input type="text" name="img_path" class="form-control" value="${movie.imgPath}">
+                        <label>포스터</label>
+
                         <c:if test="${not empty movie.imgPath}">
-                            <br>
-                            <img src="${movie.imgPath}" alt="${movie.title} 포스터" 
-                                 style="max-width:200px; height:auto; border-radius:10px;">
+                            <div class="mb-2">
+                                <img src="${pageContext.request.contextPath}${movie.imgPath}"
+                                     style="max-width:200px; border-radius:10px;">
+                            </div>
                         </c:if>
+
+                        <input type="file" name="poster" class="form-control">
+                        <small class="text-muted">
+                            파일을 선택하지 않으면 기존 포스터가 유지됩니다.
+                        </small>
                     </div>
 
+                    <!-- 제목 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">제목</label>
-                        <input type="text" name="title" class="form-control" value="${movie.title}">
+                        <label>제목</label>
+                        <input type="text" name="title" class="form-control"
+                               value="${movie.title}">
                     </div>
 
+                    <!-- 서브타이틀 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">서브타이틀</label>
-                        <input type="text" name="sub_title" class="form-control" value="${movie.subTitle}">
+                        <label>서브타이틀</label>
+                        <input type="text" name="sub_title" class="form-control"
+                               value="${movie.subTitle}">
                     </div>
 
-
-
-
-
+                    <!-- 장르 -->
                     <div class="mb-3">
 					    <label style="font-size:20px;">장르</label>
 					    <div style="display:flex; flex-wrap:wrap; gap:15px; margin-top:5px;">
@@ -120,65 +137,73 @@
 					    </div>
 					</div>
 
-
-                    
-                    
+                    <!-- 감독 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">감독</label>
-                        <input type="text" name="director" class="form-control" value="${movie.director}">
+                        <label>감독</label>
+                        <input type="text" name="director" class="form-control"
+                               value="${movie.director}">
                     </div>
 
+                    <!-- 배우 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">배우</label>
-                        <input type="text" name="actor" class="form-control" value="${movie.actor}">
+                        <label>배우</label>
+                        <input type="text" name="actor" class="form-control"
+                               value="${movie.actor}">
                     </div>
 
-
+                    <!-- 국가 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">개봉국가</label>
-                        <input type="text" name="country" class="form-control" value="${movie.country}">
+                        <label>개봉국가</label>
+                        <input type="text" name="country" class="form-control"
+                               value="${movie.country}">
                     </div>
 
+                    <!-- 개봉일 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">개봉일</label>
-                        <input type="date" name="release_date" class="form-control" 
+                        <label>개봉일</label>
+                        <input type="date" name="release_date" class="form-control"
                                value="<fmt:formatDate value='${movie.releaseDate}' pattern='yyyy-MM-dd'/>">
                     </div>
 
+                    <!-- 러닝타임 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">러닝타임</label>
-                        <input type="text" name="play_time" class="form-control" value="${movie.playTime}">
+                        <label>러닝타임</label>
+                        <input type="text" name="play_time" class="form-control"
+                               value="${movie.playTime}">
                     </div>
 
+                    <!-- 줄거리 -->
                     <div class="mb-3">
-                        <label style="font-size:20px;">줄거리</label>
-                        <textarea name="description" class="form-control" rows="4">${movie.description}</textarea>
+                        <label>줄거리</label>
+                        <textarea name="description" class="form-control"
+                                  rows="4">${movie.description}</textarea>
                     </div>
 
                     <!-- 버튼 -->
-                    <div class="d-flex justify-content-end gap-2 mt-3">
-                        <button type="submit" class="btn btn-lg btn-primary">수정</button>
-                        <button type="button" class="btn btn-lg btn-danger" id="btn-delete">삭제</button>
-                        <a href="javascript:history.back()" class="btn btn-lg btn-secondary">취소</a>
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="submit" class="btn btn-primary">수정</button>
+                        <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+                        <a href="javascript:history.back()" class="btn btn-secondary">취소</a>
                     </div>
+                </form>
+
+                <!-- 삭제 전용 폼 -->
+                <form id="deleteForm" method="post" action="${root}/admin/movie/delete">
+                    <input type="hidden" name="movie_id" value="${movie.movieId}">
                 </form>
 
             </div>
         </div>
-
     </div>
 </div>
 
 <jsp:include page="/layout/script.jsp" />
 
 <script>
-    const movieForm = document.getElementById("movieForm");
-    const btnDelete = document.getElementById("btn-delete");
-
-    btnDelete.addEventListener("click", function() {
-        if(!confirm("정말 삭제하시겠습니까?")) return;
-        movieForm.action = "${root}/admin/movie/delete";
-        movieForm.submit();
+    document.getElementById("btn-delete").addEventListener("click", () => {
+        if (confirm("정말 삭제하시겠습니까?")) {
+            document.getElementById("deleteForm").submit();
+        }
     });
 </script>
 
