@@ -95,7 +95,7 @@
 					
 					">
 		    <button class="r_btn" 
-		    onclick="location.href='${root}/mypage/reviewlist?users_id=${user.no}'">내 리뷰 보기</button>
+		    onclick="location.href='${root}/mypage/reviewlist?users_id=${review.user_id}'">내 리뷰 보기</button>
 		    
 		    <button class="p_btn" 
 		    onclick="location.href='${root}/mypage/userinfo?users_id=${user.no}'">내 정보 보기</button>      
