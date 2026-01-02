@@ -9,53 +9,32 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import movie.DAO.UserDAO;
-import movie.DTO.Users;
-import movie.Service.UserService;
-import movie.Service.UserServiceImpl;
+import movie.DAO.ReviewDAO;
+import movie.DTO.Review;
+import movie.Service.ReviewService;
+import movie.Service.ReviewServiceImpl;
 
 @WebServlet("/admin/review/*")
 public class UsersLiviewServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private UserDAO userDAO = new UserDAO();
-	private UserService userService = new UserServiceImpl(userDAO);
-	
-	/**
-	 * [get]
-	 */
-	protected void doGet(
-			HttpServletRequest request, 
-			HttpServletResponse response
-			) throws ServletException, IOException {
-		String path = request.getPathInfo();
-		String page = "";
-		System.out.println(path);
-		System.out.println("/admin/users");
-		// 유저 목록
-		if( path.equals("/list")) {
-			List<Users> usersList = userService.list();
-			request.setAttribute("usersList", usersList);
-			page = "/page/admin/users/list.jsp";
-			
-		 
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request,  response);
-	}
-	
-	
-	/**
-	 * 
-	 * [post]
-	 * 
-	 */
-	protected void doPost(
-			HttpServletRequest request, 
-			HttpServletResponse response) 
-			throws ServletException, IOException {
-		
-	
-	}
+    private ReviewService reviewService = new ReviewServiceImpl(new ReviewDAO());
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+      
+
+        String path = request.getPathInfo();
+        String page = "";
+
+        // 모든 리뷰 목록
+        if (path == null || path.equals("/list")) {
+            List<Review> reviewList = reviewService.list();
+            request.setAttribute("reviewList", reviewList);
+            page = "/page/admin/review/list.jsp";
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        dispatcher.forward(request, response);
+    }
 }
