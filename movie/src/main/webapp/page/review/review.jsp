@@ -26,7 +26,7 @@
 						<div class="row">
 							<!-- 포스터 -->
 							<div class="col-md-4 text-center">
-								<img src="${pageContext.request.contextPath}/static/img/movie/${movie.detailImgPath}"
+								<img src="${pageContext.request.contextPath}/${movie.detailImgPath}"
 									class="img-fluid rounded" alt="${movie.title}">
 							</div>
 

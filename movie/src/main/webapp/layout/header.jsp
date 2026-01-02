@@ -21,13 +21,18 @@
     
     <!-- 로그인 X -->
     <%
-    	if(username == null || username.equals("")) {
+    	if(username == null || username.equals("tes1")) {
     %>
     	<a class="menu-btn"  href="${root}/login">로그인</a>
     	<a class="menu-btn"  href="${root}/join">회원가입</a>
     <!-- 로그인 O -->
     <%
     	} else {
+    		if(username.equals("test1")) {
+    %>
+    			<a href="${root}/page/admin/admin.jsp" class="menu-btn">관리페이지</a>
+    <% 
+    		}
     %>
 	    <a href="${root}/mypage/mypage" class="menu-btn">마이페이지</a>
     	<a class="menu-btn" aria-current="page" href="${root}/logout">로그아웃</a>
