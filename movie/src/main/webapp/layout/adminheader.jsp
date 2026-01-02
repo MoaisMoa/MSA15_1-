@@ -19,7 +19,7 @@
   <div class="container-fluid">
     <a style ="color: #7D81CA;
        font-size :40px;"
-       href="${ root }/page/admin/admin.jsp">admin</a>
+       href="${ root }/index.jsp">admin</a>
     <div>
     	<P style ="color: #7D81CA">안녕하세요. 관리자님</P>
     </div>

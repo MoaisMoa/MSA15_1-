@@ -18,13 +18,6 @@ CREATE TABLE movie (
     CONSTRAINT pk_movie PRIMARY KEY (movie_id)
 );
 
-
-
-
-
-
-
-
 CREATE TABLE review (
     review_id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
